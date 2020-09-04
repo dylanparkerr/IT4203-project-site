@@ -10,6 +10,7 @@ body{
     /* height: 2000px; */
 }
 
+
 header{
     background-color: #b0b3b2;
     overflow: auto;
@@ -23,15 +24,18 @@ header{
     margin: 80px 0 0 750px;
 }
 
+
 #yellow-bar{
     height:20px;
     background-color: #ffc629;
 }
 
+
 nav{
     background-color: #231f20;
     width: 160px;
     height: 100%;
+    padding-top: 60px;
     float:left;
 }
 nav a{
@@ -40,8 +44,17 @@ nav a{
     color:white;
     text-decoration: none;
     display: block;
-    padding: 15px 0px 10px 50px;
+    padding-top: 30px;
+    text-align: center;
 }
+nav a:hover{
+    color: #b0b3b2;
+    text-decoration: underline;
+}
+nav a:active{
+    color: #ffc629
+}
+
 
 .main{
     width: 100%;
