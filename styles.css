@@ -91,6 +91,8 @@ nav a:active{
     margin-right: auto;
 }
 
+
+
 table{
     border: 1px solid #e5e5e5;
     border-radius: 10px;
@@ -128,4 +130,14 @@ td, th{
 }
 tr:nth-child(even){
     background-color: #e5e5e5;
+}
+
+.milestone-link{
+    text-decoration: none;
+}
+.milestone-link:hover{
+    text-decoration: underline;
+}
+.milestone-link:visited{
+    color: black;
 }
