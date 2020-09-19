@@ -1,0 +1,87 @@
+﻿{
+  "error": "0",
+  "total": "2391",
+  "page": "1",
+  "books": [
+    {
+      "title": "High Performance Mobile Web",
+      "subtitle": "Best Practices for Optimizing Mobile Web Apps",
+      "isbn13": "9781491912553",
+      "price": "$7.00",
+      "image": "https://itbook.store/img/books/9781491912553.png",
+      "url": "https://itbook.store/books/9781491912553"
+    },
+    {
+      "title": "jQuery Mobile Web Development Essentials, 2nd Edition",
+      "subtitle": "Build mobile-optimized websites using the simple, practical, and powerful jQuery-based framework",
+      "isbn13": "9781782167891",
+      "price": "$26.99",
+      "image": "https://itbook.store/img/books/9781782167891.png",
+      "url": "https://itbook.store/books/9781782167891"
+    },
+    {
+      "title": "Mobile Web Performance Optimization",
+      "subtitle": "Deliver a better mobile user experience by improving and optimizing your website - follow these practical steps for cutting-edge application development",
+      "isbn13": "9781785289972",
+      "price": "$23.95",
+      "image": "https://itbook.store/img/books/9781785289972.png",
+      "url": "https://itbook.store/books/9781785289972"
+    },
+    {
+      "title": "Build Mobile Websites and Apps for Smart Devices",
+      "subtitle": "",
+      "isbn13": "9780987090843",
+      "price": "$9.80",
+      "image": "https://itbook.store/img/books/9780987090843.png",
+      "url": "https://itbook.store/books/9780987090843"
+    },
+    {
+      "title": "Beginning PhoneGap",
+      "subtitle": "Mobile Web Framework for JavaScript and HTML5",
+      "isbn13": "9781430239031",
+      "price": "$24.30",
+      "image": "https://itbook.store/img/books/9781430239031.png",
+      "url": "https://itbook.store/books/9781430239031"
+    },
+    {
+      "title": "Oracle Application Express for Mobile Web Applications",
+      "subtitle": "",
+      "isbn13": "9781430249474",
+      "price": "$44.99",
+      "image": "https://itbook.store/img/books/9781430249474.png",
+      "url": "https://itbook.store/books/9781430249474"
+    },
+    {
+      "title": "Head First Mobile Web",
+      "subtitle": "",
+      "isbn13": "9781449302665",
+      "price": "$3.74",
+      "image": "https://itbook.store/img/books/9781449302665.png",
+      "url": "https://itbook.store/books/9781449302665"
+    },
+    {
+      "title": "Programming the Mobile Web, 2nd Edition",
+      "subtitle": "Reaching Users on iPhone, Android, BlackBerry, Windows Phone, and more",
+      "isbn13": "9781449334970",
+      "price": "$32.49",
+      "image": "https://itbook.store/img/books/9781449334970.png",
+      "url": "https://itbook.store/books/9781449334970"
+    },
+    {
+      "title": "Sencha Touch 2: Up and Running",
+      "subtitle": "Building Enterprise Cross-Platform Mobile Web Applications",
+      "isbn13": "9781449339388",
+      "price": "$3.35",
+      "image": "https://itbook.store/img/books/9781449339388.png",
+      "url": "https://itbook.store/books/9781449339388"
+    },
+    {
+      "title": "Don't Panic: Mobile Developer's Guide to The Galaxy, 18th Edition",
+      "subtitle": "A Community Publication about All Things Mobile",
+      "isbn13": "1001592396104",
+      "price": "$0.00",
+      "image": "https://itbook.store/img/books/1001592396104.png",
+      "url": "https://itbook.store/books/1001592396104"
+    }
+  ]
+}
