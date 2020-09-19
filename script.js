@@ -1,10 +1,10 @@
 console.log("test");
 
-$.getJSON("http://it-ebooks-api.info/v1/search/modern%20web", function(data){
+$.getJSON("https://api.itbook.store/1.0/books/9781449334970", function(data){
     console.log(data);
 });
 
-$.getJSON("http://it-ebooks-api.info/v1/book/2563063616", function(data){
+$.getJSON("https://api.itbook.store/1.0/search/mobile%20web", function(data){
     console.log(data);
 });
 
