@@ -20,7 +20,30 @@
 
     <div class="main">
         <div class="milestone-1-content">
-            <h1>Milestone 1</h1>     
+            <h1 class="page-title">Milestone 1</h1>
+            <br>
+            <h2 class="section-title">JSON Parsing</h2>
+            <br>
+            <p class="section-details">This page will take a JSON object, parse, and display the content. You can
+                choose different JSON sources from the drop menu and click the 'Show' button to display the book information.
+            </p>
+
+            <div id="selection-header">
+                <h2>Display Book Info</h2>
+            </div>
+            <div id="selection-body">
+                <label id="selection-label">Source:</label>
+                <select name="" id="">
+                    <option value="-">-</option>
+                    <option value="it-books-single">IT Books Single</option>
+                    <option value="it-books-list">IT Books Single</option>
+                    <option value="google-single">Google Single</option>
+                    <option value="google-list">Google List</option>
+                </select>
+            </div>
+            <button onclick="show()">Show</button>
+            
+
         </div>
     </div>
 </body>
