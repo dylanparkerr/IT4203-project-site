@@ -28,25 +28,56 @@
                 choose different JSON sources from the drop menu and click the 'Show' button to display the book information.
             </p>
 
-            <div id="selection-header">
-                <h2>Display Book Info</h2>
+            <div id="selection">
+                <div id="selection-header">
+                    <h2>Display Book Info</h2>
+                </div>
+                <div id="selection-body">
+                    <label id="selection-label">Source:</label>
+                    <select name="source-list" id="">
+                        <option value="-">-</option>
+                        <option value="it-books-single">IT Books Single</option>
+                        <option value="it-books-list">IT Books List</option>
+                        <option value="google-single">Google Single</option>
+                        <option value="google-list">Google List</option>
+                    </select>
+                </div>
+                <button onclick="show()">Show</button>
             </div>
-            <div id="selection-body">
-                <label id="selection-label">Source:</label>
-                <select name="" id="">
-                    <option value="-">-</option>
-                    <option value="it-books-single">IT Books Single</option>
-                    <option value="it-books-list">IT Books Single</option>
-                    <option value="google-single">Google Single</option>
-                    <option value="google-list">Google List</option>
-                </select>
+
+            <div id="result-wrap">
+                <div id=itbs>
+                    <img id="itbsImg" src="" alt="">
+                    <h1>hello</h1>
+                    <h1>world</h1>
+                    <p>text</p>
+                </div>
+
+                <div id="itbl">
+                    <img id="itblImg" src="" alt="">
+                    <h1>l-hello</h1>
+                    <h1>l-world</h1>
+                    <p>l-text</p>
+                </div>
+
+                <div id="gs">
+                    <img id="itblImg" src="" alt="">
+                    <h1>gs-hello</h1>
+                    <h1>gs-world</h1>
+                    <p>gs-text</p>
+                </div>
+
+                <div id="gl">
+                    <img id="itblImg" src="" alt="">
+                    <h1>gl-hello</h1>
+                    <h1>gl-world</h1>
+                    <p>gl-text</p>
+                </div>
             </div>
-            <button onclick="show()">Show</button>
-            
 
         </div>
     </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="script.js"></script>
+<script src="milestone1.js"></script>
 </html>

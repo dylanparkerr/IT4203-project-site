@@ -85,7 +85,7 @@ nav a:active{
 .divider{
     border-top: 1px solid #dadada;
     height: 1px;
-    width: 700px;
+    width: 70%;
     margin-top: 75px;
     margin-bottom: 75px;
     margin-left: auto;
@@ -151,6 +151,7 @@ tr:nth-child(even){
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     margin-top:50px;
+    float: left;
 }
 #selection-header h2{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -180,11 +181,32 @@ tr:nth-child(even){
 }
 button{
     float: right;
-    margin-right: 10%;
     background-color: #231f20;
     color: white;
     width:200px;
     padding: 10px;
     border-radius: 10px;
     border:none;
+}
+
+#itbsImg{
+    display: inline;
+}
+
+#result-wrap{
+    margin-top:150px;
+    height:100%;
+    width: 100%;
+}
+#itbs{
+    background-color: blue;
+}
+#itbl{
+    background-color: green;
+}
+#gs{
+    background-color: red;
+}
+#gl{
+    background-color: yellow;
 }
