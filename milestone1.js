@@ -1,9 +1,7 @@
-console.log("test");
-
-const itBooksSingle = $.getJSON("books/it-books-single.json", function(data){
+$.getJSON("books/it-books-single.json", function(data){
     console.log(data);
+    $("[id=itbsImg]").attr("src",data.image);
 });
-console.log(typeof(itBooksSingle));
 
 const itBooksList = $.getJSON("books/it-books-list.json", function(data){
     console.log(data);
@@ -19,6 +17,30 @@ const googleList = $.getJSON("https://www.googleapis.com/books/v1/volumes?q=mode
 
 hideAll();
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function show(){
     option = $('[name=source-list]').val();
     if(option == '-'){
@@ -27,8 +49,6 @@ function show(){
     else if(option == 'it-books-single'){
         hideAll();
         $("[id=itbs]").show();
-
-        // $("[id=itbsImg]").attr("alt","test");
     }
     else if(option == 'it-books-list'){
         hideAll();

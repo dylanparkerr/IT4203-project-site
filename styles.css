@@ -188,25 +188,24 @@ button{
     border-radius: 10px;
     border:none;
 }
-
-#itbsImg{
-    display: inline;
+button:hover{
+    background-color: #4e4e4e;
 }
+button:active{
+    background-color: #ffc629;
+}
+
+
 
 #result-wrap{
     margin-top:150px;
     height:100%;
     width: 100%;
 }
-#itbs{
-    background-color: blue;
-}
-#itbl{
-    background-color: green;
-}
-#gs{
-    background-color: red;
-}
+#itbs,
+#itbl,
+#gs,
 #gl{
-    background-color: yellow;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
 }
