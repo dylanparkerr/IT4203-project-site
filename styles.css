@@ -3,6 +3,9 @@
     margin:0;
     padding:0;
 }
+body{
+    
+}
 
 header{
     background-color: #b0b3b2;
@@ -251,3 +254,16 @@ button:active{
 }
 
 /* source 2 */
+.book{
+    width:100%;
+    border-bottom: 1px solid #e5e5e5;
+}
+.book img{
+    float: left;
+}
+.book table{
+    float: left;
+}
+.floatClear{
+    clear:both;
+}

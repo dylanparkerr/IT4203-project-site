@@ -18,6 +18,11 @@ $.getJSON("books/it-books-single.json", function(data){
 
 const itBooksList = $.getJSON("books/it-books-list.json", function(data){
     console.log(data);
+    $("[id=0img]").attr("src",data.books[0].image);
+
+    $("[id=1img]").attr("src",data.books[1].image);
+
+    $("[id=2img]").attr("src",data.books[2].image);
 });
 
 const googleSingle = $.getJSON("https://www.googleapis.com/books/v1/volumes/Wfan6L9RGgYC", function(data){
