@@ -1,3 +1,4 @@
+// source 1
 $.getJSON("books/it-books-single.json", function(data){
     $("[id=itbsImg]").attr("src",data.image);
     $("[id=itbsTitle]").html(data.title);
@@ -15,6 +16,7 @@ $.getJSON("books/it-books-single.json", function(data){
     $("[id=itbsRating]").html(data.rating);
 });
 
+// source 2
 $.getJSON("books/it-books-list.json", function(data){
     for(let i=0;i<10;i++){
         $(`[id=${i}img]`).attr("src",data.books[i].image);
@@ -25,6 +27,7 @@ $.getJSON("books/it-books-list.json", function(data){
     }
 });
 
+// source 3
 $.getJSON("https://www.googleapis.com/books/v1/volumes/Wfan6L9RGgYC", function(data){
     $("[id=gsImg]").attr("src",data.volumeInfo.imageLinks.small);
     $("[id=gsTitle]").html(data.volumeInfo.title);
@@ -41,6 +44,7 @@ $.getJSON("https://www.googleapis.com/books/v1/volumes/Wfan6L9RGgYC", function(d
     $("[id=gsDesc]").html(data.volumeInfo.description);
 });
 
+// source 4
 $.getJSON("https://www.googleapis.com/books/v1/volumes?q=modern%20web", function(data){
     for(let i=0;i<10;i++){
         $(`[id=g${i}img]`).attr("src",data.items[i].volumeInfo.imageLinks.smallThumbnail);
@@ -51,8 +55,10 @@ $.getJSON("https://www.googleapis.com/books/v1/volumes?q=modern%20web", function
     }
 });
 
+// intiall hide all the sources
 hideAll();
 
+// show source depending on selection
 function show(){ 
     option = $('[name=source-list]').val();
     if(option == '-'){

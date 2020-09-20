@@ -4,6 +4,7 @@
     padding:0;
 }
 
+
 header{
     background-color: #b0b3b2;
     overflow: auto;
@@ -56,7 +57,6 @@ nav a:active{
     height: 100%;
     padding-left: 160px; /*to offset the nav*/
 }
-
 .home-content,
 .milestone-1-content{
     padding: 100px 20px 20px 20px;
@@ -86,6 +86,7 @@ nav a:active{
     text-align: justify;
 }
 
+
 .divider{
     border-top: 1px solid #dadada;
     height: 1px;
@@ -95,6 +96,7 @@ nav a:active{
     margin-left: auto;
     margin-right: auto;
 }
+
 
 
 
@@ -135,11 +137,13 @@ nav a:active{
 .bottomRight{
     border-bottom-right-radius: 10px;
 }
-tr:nth-child(even){
+/* used for multiple tables */
+tr:nth-child(even){ 
     background-color: #e5e5e5;
 }
 
 .milestone-link{
+    color: black;
     text-decoration: none;
 }
 .milestone-link:hover{
@@ -150,6 +154,9 @@ tr:nth-child(even){
 }
 
 
+
+
+/* milestone 1 page */
 #selection-header{
     height:40px;
     width:60%;
@@ -185,6 +192,8 @@ tr:nth-child(even){
     margin-top: 10px;
     margin-right: 10px;
 }
+
+
 button{
     float: right;
     background-color: #231f20;
@@ -202,8 +211,6 @@ button:active{
 }
 
 
-/* milestone 1 page */
-
 /* for all sources */
 #result-wrap{
     margin-top:150px;
@@ -218,6 +225,7 @@ button:active{
     border: 1px solid #e5e5e5;
     border-radius: 10px;
 }
+
 
 /* source 1 */
 #itbsLeft{
@@ -253,6 +261,7 @@ button:active{
     padding: 5px;
 }
 
+
 /* source 2 */
 .book{
     width:100%;
@@ -281,6 +290,7 @@ button:active{
 .floatClear{
     clear:both;
 }
+
 
 /* source 3 */
 #gsLeft{
@@ -318,11 +328,9 @@ button:active{
     padding: 5px;
 }
 
+
 /* source 4 reused alot from 2*/
 .gImgWrap{
     float: left;
     padding: 80px;
-}
-.gImgWrap img{
-   
 }
