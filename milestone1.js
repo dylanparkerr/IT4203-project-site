@@ -1,3 +1,37 @@
+// show source depending on selection
+function show(){ 
+    option = $('[name=source-list]').val();
+    if(option == '-'){
+        hideAll();
+    }
+    else if(option == 'it-books-single'){
+        hideAll();
+        $("[id=itbs]").show();
+    }
+    else if(option == 'it-books-list'){
+        hideAll();
+        $("[id=itbl]").show();
+    }
+    else if(option == 'google-single'){
+        hideAll();
+        $("[id=gs]").show();
+    }
+    else if(option == 'google-list'){
+        hideAll();
+        $("[id=gl]").show();
+    }
+}
+
+function hideAll(){
+    $("[id=itbs]").hide();
+    $("[id=itbl]").hide();
+    $("[id=gs]").hide();
+    $("[id=gl]").hide();
+}
+
+// intially hide all the sources
+hideAll();
+
 // source 1
 $.getJSON("books/it-books-single.json", function(data){
     $("[id=itbsImg]").attr("src",data.image);
@@ -55,36 +89,5 @@ $.getJSON("https://www.googleapis.com/books/v1/volumes?q=modern%20web", function
     }
 });
 
-// intiall hide all the sources
-hideAll();
 
-// show source depending on selection
-function show(){ 
-    option = $('[name=source-list]').val();
-    if(option == '-'){
-        hideAll();
-    }
-    else if(option == 'it-books-single'){
-        hideAll();
-        $("[id=itbs]").show();
-    }
-    else if(option == 'it-books-list'){
-        hideAll();
-        $("[id=itbl]").show();
-    }
-    else if(option == 'google-single'){
-        hideAll();
-        $("[id=gs]").show();
-    }
-    else if(option == 'google-list'){
-        hideAll();
-        $("[id=gl]").show();
-    }
-}
 
-function hideAll(){
-    $("[id=itbs]").hide();
-    $("[id=itbl]").hide();
-    $("[id=gs]").hide();
-    $("[id=gl]").hide();
-}
