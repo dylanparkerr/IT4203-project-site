@@ -292,6 +292,8 @@ button:active{
 #gsImg{
     margin: auto;
     display: block;
+    padding-top: 45px;
+    padding-bottom: 40px;
 }
 #gsTitle{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -314,4 +316,13 @@ button:active{
     font-size: 20px;
     font-weight: 400;
     padding: 5px;
+}
+
+/* source 4 reused alot from 2*/
+.gImgWrap{
+    float: left;
+    padding: 80px;
+}
+.gImgWrap img{
+   
 }
