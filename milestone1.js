@@ -16,7 +16,7 @@ $.getJSON("books/it-books-single.json", function(data){
     $("[id=itbsRating]").html(data.rating);
 });
 
-const itBooksList = $.getJSON("books/it-books-list.json", function(data){
+$.getJSON("books/it-books-list.json", function(data){
     console.log(data);
     $("[id=0img]").attr("src",data.books[0].image);
     $("[id=0title]").html(data.books[0].title);
@@ -79,13 +79,25 @@ const itBooksList = $.getJSON("books/it-books-list.json", function(data){
     $("[id=9price]").html(data.books[9].price);
 });
 
-const googleSingle = $.getJSON("https://www.googleapis.com/books/v1/volumes/Wfan6L9RGgYC", function(data){
+$.getJSON("https://www.googleapis.com/books/v1/volumes/Wfan6L9RGgYC", function(data){
     console.log(data);
 
-    
+    $("[id=gsImg]").attr("src",data.volumeInfo.imageLinks.small);
+    $("[id=gsTitle]").html(data.volumeInfo.title);
+    $("[id=gsSubtitle]").html(data.volumeInfo.subtitle);
+
+    $("[id=gsAuth]").html(data.volumeInfo.authors);
+    $("[id=gsYear]").html(data.volumeInfo.publishedDate);
+    $("[id=gsISBN10]").html(data.volumeInfo.industryIdentifiers[0].identifier);
+    $("[id=gsISBN13]").html(data.volumeInfo.industryIdentifiers[1].identifier);
+    $("[id=gsLang]").html(data.volumeInfo.language);
+    $("[id=gsPages]").html(data.volumeInfo.pageCount);
+    $("[id=gsPub]").html(data.volumeInfo.publisher);
+    $("[id=gsRating]").html(data.volumeInfo.averageRating);
+    $("[id=gsDesc]").html(data.volumeInfo.description);
 });
 
-const googleList = $.getJSON("https://www.googleapis.com/books/v1/volumes?q=modern%20web", function(data){
+$.getJSON("https://www.googleapis.com/books/v1/volumes?q=modern%20web", function(data){
     console.log(data);
 });
 

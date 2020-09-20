@@ -271,14 +271,47 @@ button:active{
     
 }
 .book td{
+    vertical-align: top;
     background-color: white;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
     font-weight: 400;
-    padding: 5px;
+    padding: 10px;
 }
 .floatClear{
     clear:both;
 }
 
 /* source 3 */
+#gsLeft{
+    width:40%;
+    height:100%;
+    padding: 20px;
+    float:left;
+}
+#gsImg{
+    margin: auto;
+    display: block;
+}
+#gsTitle{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+}
+#gsSubtitle{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    font-style: italic;
+}
+#gsTable{
+    border-left: 1px solid #e5e5e5; 
+    border-spacing: 0;
+}
+#gsTable td{
+    vertical-align: top;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 5px;
+}
