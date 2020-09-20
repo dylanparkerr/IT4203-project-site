@@ -1,3 +1,4 @@
+/* general page formats */
 *{
     margin:0;
     padding:0;
@@ -94,13 +95,15 @@ nav a:active{
 
 
 
-table{
+/* home page */
+#milestoneTable{
+    width: 100%;
     border: 1px solid #e5e5e5;
     border-radius: 10px;
     border-spacing: 0;
     margin: 0 0 150px 0;
 }
-th{
+#milestoneTable th{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
     font-weight: 500;
@@ -109,12 +112,12 @@ th{
     text-align: left;
     
 }
-td{
+#milestoneTable td{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 16px;
     font-weight: 400;
 }
-td, th{
+#milestoneTable td, th{
     padding: 10px 10px 10px 10px;
 }
 .topLeft{
@@ -196,8 +199,9 @@ button:active{
 }
 
 
+/* milestone 1 page */
 
-
+/* for all sources */
 #result-wrap{
     margin-top:150px;
     height:100%;
@@ -207,6 +211,43 @@ button:active{
 #itbl,
 #gs,
 #gl{
+    height:100%;
     border: 1px solid #e5e5e5;
     border-radius: 10px;
 }
+
+/* source 1 */
+#itbsLeft{
+    border-right: 1px solid #e5e5e5; 
+    width:40%;
+    height:100%;
+    padding: 20px;
+    float:left;
+}
+#itbsImg{
+    margin: auto;
+    display: block;
+}
+#itbsTitle{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    
+}
+#itbsSubTitle{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    font-style: italic;
+}
+#itbsTable{
+    border-spacing: 0;
+}
+#itbsTable td{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 5px;
+}
+
+/* source 2 */

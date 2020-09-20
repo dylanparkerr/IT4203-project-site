@@ -1,6 +1,19 @@
 $.getJSON("books/it-books-single.json", function(data){
     console.log(data);
     $("[id=itbsImg]").attr("src",data.image);
+    $("[id=itbsTitle]").html(data.title);
+    $("[id=itbsSubTitle]").html(data.subtitle);
+
+    $("[id=itbsAuth]").html(data.authors);
+    $("[id=itbsDesc]").html(data.desc);
+    $("[id=itbsYear]").html(data.year);
+    $("[id=itbsISBN10]").html(data.isbn10);
+    $("[id=itbsISBN13]").html(data.isbn13);
+    $("[id=itbsLang]").html(data.language);
+    $("[id=itbsPages]").html(data.pages);
+    $("[id=itbsPrice]").html(data.price);
+    $("[id=itbsPub]").html(data.publisher);
+    $("[id=itbsRating]").html(data.rating);
 });
 
 const itBooksList = $.getJSON("books/it-books-list.json", function(data){
@@ -16,21 +29,6 @@ const googleList = $.getJSON("https://www.googleapis.com/books/v1/volumes?q=mode
 });
 
 hideAll();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
