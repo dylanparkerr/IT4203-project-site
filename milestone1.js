@@ -85,7 +85,7 @@ $.getJSON("https://www.googleapis.com/books/v1/volumes?q=modern%20web", function
         $(`[id=g${i}title]`).html(data.items[i].volumeInfo.title);
         $(`[id=g${i}subtitle]`).html(data.items[i].volumeInfo.subtitle);
         $(`[id=g${i}isbn13]`).html(data.items[i].volumeInfo.industryIdentifiers[0].identifier);
-        $(`[id=g${i}price]`).html(data.items[i].volumeInfo.industryIdentifiers[1].identifier);
+        $(`[id=g${i}isbn10]`).html(data.items[i].volumeInfo.industryIdentifiers[1].identifier);
     }
 });
 
