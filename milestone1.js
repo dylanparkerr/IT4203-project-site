@@ -63,7 +63,8 @@ $.getJSON("books/it-books-list.json", function(data){
 
 // source 3
 $.getJSON("https://www.googleapis.com/books/v1/volumes/Wfan6L9RGgYC", function(data){
-    $("[id=gsImg]").attr("src",data.volumeInfo.imageLinks.small);
+    console.log(data);
+    $("[id=gsImg]").attr("src",data.volumeInfo.imageLinks.thumbnail);
     $("[id=gsTitle]").html(data.volumeInfo.title);
     $("[id=gsSubtitle]").html(data.volumeInfo.subtitle);
 
