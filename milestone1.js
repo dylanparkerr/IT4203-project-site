@@ -1,28 +1,24 @@
 // show source depending on selection
-function show(){ 
-    option = $('[name=source-list]').val();
-    if(option == '-'){
+function show() {
+    option = $("[name=source-list]").val();
+    if (option == "-") {
         hideAll();
-    }
-    else if(option == 'it-books-single'){
+    } else if (option == "it-books-single") {
         hideAll();
         $("[id=itbs]").show();
-    }
-    else if(option == 'it-books-list'){
+    } else if (option == "it-books-list") {
         hideAll();
         $("[id=itbl]").show();
-    }
-    else if(option == 'google-single'){
+    } else if (option == "google-single") {
         hideAll();
         $("[id=gs]").show();
-    }
-    else if(option == 'google-list'){
+    } else if (option == "google-list") {
         hideAll();
         $("[id=gl]").show();
     }
 }
 
-function hideAll(){
+function hideAll() {
     $("[id=itbs]").hide();
     $("[id=itbl]").hide();
     $("[id=gs]").hide();
@@ -33,8 +29,8 @@ function hideAll(){
 hideAll();
 
 // source 1
-$.getJSON("books/it-books-single.json", function(data){
-    $("[id=itbsImg]").attr("src",data.image);
+$.getJSON("books/it-books-single.json", function (data) {
+    $("[id=itbsImg]").attr("src", data.image);
     $("[id=itbsTitle]").html(data.title);
     $("[id=itbsSubTitle]").html(data.subtitle);
 
@@ -51,9 +47,9 @@ $.getJSON("books/it-books-single.json", function(data){
 });
 
 // source 2
-$.getJSON("books/it-books-list.json", function(data){
-    for(let i=0;i<10;i++){
-        $(`[id=${i}img]`).attr("src",data.books[i].image);
+$.getJSON("books/it-books-list.json", function (data) {
+    for (let i = 0; i < 10; i++) {
+        $(`[id=${i}img]`).attr("src", data.books[i].image);
         $(`[id=${i}title]`).html(data.books[i].title);
         $(`[id=${i}subtitle]`).html(data.books[i].subtitle);
         $(`[id=${i}isbn13]`).html(data.books[i].isbn13);
@@ -62,9 +58,11 @@ $.getJSON("books/it-books-list.json", function(data){
 });
 
 // source 3
-$.getJSON("https://www.googleapis.com/books/v1/volumes/Wfan6L9RGgYC", function(data){
+$.getJSON("https://www.googleapis.com/books/v1/volumes/Wfan6L9RGgYC", function (
+    data
+) {
     console.log(data);
-    $("[id=gsImg]").attr("src",data.volumeInfo.imageLinks.thumbnail);
+    $("[id=gsImg]").attr("src", data.volumeInfo.imageLinks.thumbnail);
     $("[id=gsTitle]").html(data.volumeInfo.title);
     $("[id=gsSubtitle]").html(data.volumeInfo.subtitle);
 
@@ -80,15 +78,22 @@ $.getJSON("https://www.googleapis.com/books/v1/volumes/Wfan6L9RGgYC", function(d
 });
 
 // source 4
-$.getJSON("https://www.googleapis.com/books/v1/volumes?q=modern%20web", function(data){
-    for(let i=0;i<10;i++){
-        $(`[id=g${i}img]`).attr("src",data.items[i].volumeInfo.imageLinks.smallThumbnail);
-        $(`[id=g${i}title]`).html(data.items[i].volumeInfo.title);
-        $(`[id=g${i}subtitle]`).html(data.items[i].volumeInfo.subtitle);
-        $(`[id=g${i}isbn13]`).html(data.items[i].volumeInfo.industryIdentifiers[0].identifier);
-        $(`[id=g${i}isbn10]`).html(data.items[i].volumeInfo.industryIdentifiers[1].identifier);
+$.getJSON(
+    "https://www.googleapis.com/books/v1/volumes?q=modern%20web",
+    function (data) {
+        for (let i = 0; i < 10; i++) {
+            $(`[id=g${i}img]`).attr(
+                "src",
+                data.items[i].volumeInfo.imageLinks.smallThumbnail
+            );
+            $(`[id=g${i}title]`).html(data.items[i].volumeInfo.title);
+            $(`[id=g${i}subtitle]`).html(data.items[i].volumeInfo.subtitle);
+            $(`[id=g${i}isbn13]`).html(
+                data.items[i].volumeInfo.industryIdentifiers[0].identifier
+            );
+            $(`[id=g${i}isbn10]`).html(
+                data.items[i].volumeInfo.industryIdentifiers[1].identifier
+            );
+        }
     }
-});
-
-
-
+);

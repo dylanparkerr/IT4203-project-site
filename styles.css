@@ -1,64 +1,60 @@
 /* general page formats */
-*{
-    margin:0;
-    padding:0;
+* {
+    margin: 0;
+    padding: 0;
 }
 
-
-header{
+header {
     background-color: #b0b3b2;
     overflow: auto;
 }
-#ksu-logo{
-    float:left;
+#ksu-logo {
+    float: left;
 }
-#header-title{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+#header-title {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 1;
     margin: 80px 0 0 750px;
 }
 
-
-#yellow-bar{
-    height:20px;
+#yellow-bar {
+    height: 20px;
     background-color: #ffc629;
 }
-
 
 nav {
     background-color: #231f20;
     width: 160px;
     height: 100vh;
     padding-top: 60px;
-    float:left;
+    float: left;
     position: -webkit-sticky;
     position: sticky;
     top: 0px;
 }
-nav a{
+nav a {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
-    color:white;
+    color: white;
     text-decoration: none;
     display: block;
     padding-top: 30px;
     text-align: center;
 }
-nav a:hover{
+nav a:hover {
     color: #b0b3b2;
     text-decoration: underline;
 }
-nav a:active{
-    color: #ffc629
+nav a:active {
+    color: #ffc629;
 }
 
-
-.main{
+.main {
     height: 100%;
     padding-left: 160px; /*to offset the nav*/
 }
 .home-content,
-.milestone-1-content{
+.milestone-1-content {
     padding: 100px 20px 20px 20px;
     width: 100%-20px; /*fixes issue where the this container is wider than everything else*/
     height: 100%;
@@ -66,28 +62,26 @@ nav a:active{
     margin: auto;
 }
 
-
-.page-title{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.page-title {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 45px;
     font-weight: 400;
     font-style: italic;
 }
-.section-title{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.section-title {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 30px;
     font-weight: 400;
     font-style: italic;
 }
-.section-details{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.section-details {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
     font-weight: 400;
     text-align: justify;
 }
 
-
-.divider{
+.divider {
     border-top: 1px solid #dadada;
     height: 1px;
     width: 70%;
@@ -97,240 +91,226 @@ nav a:active{
     margin-right: auto;
 }
 
-
-
-
 /* home page */
-#milestoneTable{
+#milestoneTable {
     width: 100%;
     border: 1px solid #e5e5e5;
     border-radius: 10px;
     border-spacing: 0;
     margin: 0 0 150px 0;
 }
-#milestoneTable th{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+#milestoneTable th {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
     font-weight: 500;
     color: black;
     background-color: #ffc629;
     text-align: left;
-    
 }
-#milestoneTable td{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+#milestoneTable td {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 16px;
     font-weight: 400;
 }
-#milestoneTable td, th{
+#milestoneTable td,
+th {
     padding: 10px 10px 10px 10px;
 }
-.topLeft{
+.topLeft {
     border-top-left-radius: 10px;
 }
-.topRight{
+.topRight {
     border-top-right-radius: 10px;
 }
-.bottomLeft{
+.bottomLeft {
     border-bottom-left-radius: 10px;
 }
-.bottomRight{
+.bottomRight {
     border-bottom-right-radius: 10px;
 }
 /* used for multiple tables */
-tr:nth-child(even){ 
+tr:nth-child(even) {
     background-color: #e5e5e5;
 }
 
-.milestone-link{
+.milestone-link {
     color: black;
     text-decoration: none;
 }
-.milestone-link:hover{
+.milestone-link:hover {
     text-decoration: underline;
 }
-.milestone-link:visited{
+.milestone-link:visited {
     color: black;
 }
 
-
-
-
 /* milestone 1 page */
-#selection-header{
-    height:40px;
-    width:60%;
+#selection-header {
+    height: 40px;
+    width: 60%;
     background-color: #ffc629;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    margin-top:50px;
+    margin-top: 50px;
     float: left;
 }
-#selection-header h2{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+#selection-header h2 {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
     font-weight: 500;
     padding: 5px 0 0 20px;
 }
-#selection-body{
-    width:60%;
+#selection-body {
+    width: 60%;
     background-color: #e5e5e5;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    margin-right:0;
-    float:left;
+    margin-right: 0;
+    float: left;
 }
-#selection-body label{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+#selection-body label {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 30px;
     font-weight: 400;
     padding-left: 20px;
 }
-#selection-body select{
+#selection-body select {
     float: right;
     border-radius: 10px;
     margin-top: 10px;
     margin-right: 10px;
 }
 
-
-button{
+button {
     float: right;
     background-color: #231f20;
     color: white;
-    width:200px;
+    width: 200px;
     padding: 10px;
     border-radius: 10px;
-    border:none;
+    border: none;
 }
-button:hover{
+button:hover {
     background-color: #4e4e4e;
 }
-button:active{
+button:active {
     background-color: #ffc629;
 }
 
-
 /* for all sources */
-#result-wrap{
-    margin-top:150px;
-    height:100%;
+#result-wrap {
+    margin-top: 150px;
+    height: 100%;
     width: 100%;
 }
 #itbs,
 #itbl,
 #gs,
-#gl{
-    height:100%;
+#gl {
+    height: 100%;
     border: 1px solid #e5e5e5;
     border-radius: 10px;
 }
 
-
 /* source 1 */
-#itbsLeft{
-    border-right: 1px solid #e5e5e5; 
-    width:40%;
-    height:100%;
+#itbsLeft {
+    border-right: 1px solid #e5e5e5;
+    width: 40%;
+    height: 100%;
     padding: 20px;
-    float:left;
+    float: left;
 }
-#itbsImg{
+#itbsImg {
     margin: auto;
     display: block;
 }
-#itbsTitle{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+#itbsTitle {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 30px;
     font-weight: 400;
-    
 }
-#itbsSubTitle{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+#itbsSubTitle {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
     font-weight: 400;
     font-style: italic;
 }
-#itbsTable{
+#itbsTable {
     border-spacing: 0;
 }
-#itbsTable td{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+#itbsTable td {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
     font-weight: 400;
     padding: 5px;
 }
 
-
 /* source 2 */
-.book{
-    width:100%;
+.book {
+    width: 100%;
     height: 351px;
     border-bottom: 1px solid #e5e5e5;
 }
-.book img{
+.book img {
     float: left;
 }
-.imgWrap{
+.imgWrap {
     float: left;
 }
-.book table{
+.book table {
     border-spacing: 0;
     padding-top: 50px;
-    
 }
-.book td{
+.book td {
     vertical-align: top;
     background-color: white;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
     font-weight: 400;
     padding: 10px;
 }
-.floatClear{
-    clear:both;
+.floatClear {
+    clear: both;
 }
-
 
 /* source 3 */
-#gsLeft{
-    width:40%;
-    height:100%;
+#gsLeft {
+    width: 40%;
+    height: 100%;
     padding: 20px;
-    float:left;
+    float: left;
 }
-#gsImg{
+#gsImg {
     margin: auto;
     display: block;
     padding-top: 45px;
     padding-bottom: 40px;
 }
-#gsTitle{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+#gsTitle {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 30px;
     font-weight: 400;
 }
-#gsSubtitle{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+#gsSubtitle {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
     font-weight: 400;
     font-style: italic;
 }
-#gsTable{
-    border-left: 1px solid #e5e5e5; 
+#gsTable {
+    border-left: 1px solid #e5e5e5;
     border-spacing: 0;
 }
-#gsTable td{
+#gsTable td {
     vertical-align: top;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
     font-weight: 400;
     padding: 5px;
 }
 
-
 /* source 4 reused alot from 2*/
-.gImgWrap{
+.gImgWrap {
     float: left;
     padding: 80px;
 }
