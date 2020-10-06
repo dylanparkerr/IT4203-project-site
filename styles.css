@@ -54,7 +54,10 @@ nav a:active {
     padding-left: 160px; /*to offset the nav*/
 }
 .home-content,
-.milestone-1-content {
+.milestone-1-content,
+.milestone-2-content,
+.milestone-3-content,
+.milestone-4-content {
     padding: 100px 20px 20px 20px;
     width: 100%-20px; /*fixes issue where the this container is wider than everything else*/
     height: 100%;
@@ -181,7 +184,7 @@ tr:nth-child(even) {
     margin-right: 10px;
 }
 
-button {
+#showSourceBtn {
     float: right;
     background-color: #231f20;
     color: white;
@@ -190,10 +193,10 @@ button {
     border-radius: 10px;
     border: none;
 }
-button:hover {
+#showSourceBtn:hover {
     background-color: #4e4e4e;
 }
-button:active {
+#showSourceBtn:active {
     background-color: #ffc629;
 }
 
@@ -313,4 +316,75 @@ button:active {
 .gImgWrap {
     float: left;
     padding: 80px;
+}
+
+/* milestone 2 page */
+#search {
+}
+
+#search-header {
+    height: 40px;
+    width: 70%;
+    background-color: #ffc629;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-top: 50px;
+    float: left;
+}
+#search-header h2 {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 5px 0 0 20px;
+}
+#search-body {
+    width: 70%;
+    background-color: #e5e5e5;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-right: 0;
+    float: left;
+    /* text-align: center; */
+}
+#search-body input {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 25px;
+    font-weight: 400;
+    margin: 10px 0px 10px 10px;
+    padding-left: 10px;
+    width: 80%;
+    border: none;
+    border-radius: 10px;
+    float: left;
+}
+#search-body input::placeholder {
+    color: #e5e5e5;
+}
+
+#searchBtn {
+    float: right;
+    background-color: #231f20;
+    color: white;
+    width: 15%;
+    padding: 10px;
+    margin: 10px 10px 10px 0px;
+    border-radius: 10px;
+    border: none;
+}
+#searchBtn:hover {
+    background-color: #4e4e4e;
+}
+#searchBtn:active {
+    background-color: #ffc629;
+}
+
+#bookshelfBtn {
+    float: right;
+    background-color: #231f20;
+    color: white;
+    padding: 10px;
+    /* margin-top: 10px; */
+    height: 55px;
+    border-radius: 10px;
+    border: none;
 }

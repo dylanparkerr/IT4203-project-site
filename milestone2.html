@@ -19,7 +19,37 @@
         </nav>
 
         <div class="main">
-            <div class="milestone-2-content"></div>
+            <div class="milestone-2-content">
+                <h1 class="page-title">Milestone 2</h1>
+                <br />
+                <h2 class="section-title">Google Books API Integration</h2>
+                <br />
+                <p class="section-details">
+                    This page focuses on intergrating the Google Books API. The
+                    page has a search feature that links to the API and returns
+                    books based on the keywords used. Users can click on any
+                    book result to see more detailed information about that
+                    entry. Click the "My Bookshelf" button to see the list of
+                    books I've curated myself on Google Books.
+                </p>
+
+                <div id="search">
+                    <div id="search-header">
+                        <h2>Search Google Books</h2>
+                    </div>
+                    <div id="search-body">
+                        <input
+                            type="search"
+                            placeholder="Ex: The Great Gatsby"
+                        />
+                        <button id="searchBtn" onclick="search()">
+                            Search
+                        </button>
+                    </div>
+                    <button id="bookshelfBtn">My Bookshelf</button>
+                    <div class="floatclear"></div>
+                </div>
+            </div>
         </div>
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
