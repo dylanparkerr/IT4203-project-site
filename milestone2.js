@@ -24,33 +24,48 @@ function formSearchURL(searchTerms) {
         }
     }
     url += URL_BACK;
-    console.log(url);
+    // console.log(url);
     return url;
 }
 
+let searchResultsJSON;
 function search() {
     const searchTerms = $("[id=searchInput]").val();
     const url = formSearchURL(searchTerms);
     $.get(url, function (data) {
+        searchResultsJSON = data;
         console.log(data);
     });
+
     showList();
 }
 
-function showList() {
+let currentPage = 0;
+function showList(pageNumber = currentPage) {
     hideAll();
+    currentPage = pageNumber;
+
+    console.log(pageNumber);
+    console.log("set search results here");
+
     $("[id=bookList]").show();
     $("[id=pageNumberRow]").show();
 }
 
 function showDetails() {
     hideAll();
+
+    console.log("set book details here");
+
     $("[id=bookDetails]").show();
     $("[id=backBtn]").show();
 }
 
 function showBookshelf() {
     hideAll();
+
+    console.log("set bookshelf results here");
+
     $("[id=bookshelf]").show();
     $("[id=backBtn]").show();
 }

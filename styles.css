@@ -409,7 +409,11 @@ tr:nth-child(even) {
     margin: auto;
     background-color: indigo;
     height: 100%;
-    width: 20px;
+    width: 80%;
+    text-align: center;
+}
+.pageNumber {
+    display: inline;
 }
 
 #searchResult {
