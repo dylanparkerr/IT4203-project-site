@@ -387,3 +387,54 @@ tr:nth-child(even) {
     border-radius: 10px;
     border: none;
 }
+
+#navBar {
+    background-color: grey;
+    width: 100%;
+    height: 30px;
+    margin-top: 170px;
+    position: relative; /*so that back button left isnt left of the page*/
+}
+#backBtn {
+    background-color: hotpink;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#pageNumberRow {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: indigo;
+    height: 100%;
+    width: 20px;
+}
+
+#searchResult {
+    margin-top: 25px;
+}
+#bookList {
+    background-color: teal;
+    width: 100%;
+    height: 200px;
+}
+
+#bookDetails {
+    background-color: tomato;
+    width: 100%;
+    height: 200px;
+}
+
+#bookshelf {
+    background-color: yellowgreen;
+    width: 100%;
+    height: 200px;
+}
+
+.bookRes {
+    background-color: violet;
+    width: 100px;
+    height: 100px;
+}

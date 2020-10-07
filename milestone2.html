@@ -47,8 +47,25 @@
                             Search
                         </button>
                     </div>
-                    <button id="bookshelfBtn">My Bookshelf</button>
+                    <button id="bookshelfBtn" onclick="showBookshelf()">
+                        My Bookshelf
+                    </button>
                     <div class="floatclear"></div>
+                </div>
+
+                <div id="navBar">
+                    <button id="backBtn" onclick="showList()">Back</button>
+                    <div id="pageNumberRow"></div>
+                </div>
+
+                <div id="searchResult">
+                    <div id="bookList">
+                        <div class="bookRes" onclick="showDetails()"></div>
+                    </div>
+
+                    <div id="bookDetails"></div>
+
+                    <div id="bookshelf"></div>
                 </div>
             </div>
         </div>
