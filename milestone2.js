@@ -1,4 +1,3 @@
-console.log("milestone2");
 function hideAll() {
     $("[id=bookList]").hide();
     $("[id=bookDetails]").hide();
@@ -8,11 +7,11 @@ function hideAll() {
 }
 hideAll();
 
+//form the url used to call the Google Books api
 function formSearchURL(searchTerms) {
     const URL_FRONT = "https://www.googleapis.com/books/v1/volumes?q=";
     const URL_BACK =
         "&maxResults=40&key=AIzaSyAapv3F22n1UHUtHh5bnUKM3vHm62bfvXg";
-
     const terms = searchTerms.split(" ");
 
     let url = "";
@@ -28,6 +27,7 @@ function formSearchURL(searchTerms) {
     return url;
 }
 
+// store the JSON returned by a search for use when pulling detailed info
 let searchResultsJSON;
 function search() {
     const searchTerms = $("[id=searchInput]").val();
@@ -35,24 +35,48 @@ function search() {
     $.get(url, function (data) {
         searchResultsJSON = data;
         console.log(data);
+    }).then(function (response) {
+        showList();
     });
 
-    showList();
+    //pretty sure i dont need these
+    // currentPage = 0;
+    // showList();
 }
 
+function populateList(pageNumber) {
+    const resultsPerPage = 5;
+    let pageOffset = pageNumber * resultsPerPage;
+
+    //empty any book results in the list before repopulating
+    $("[id=bookList]").empty();
+    //create containers for the number of results
+    for (let i = 0; i < resultsPerPage; i++) {
+        $("[id=bookList]").append(
+            `<div class="bookRes" onclick="showDetails(${i})"></div>`
+        );
+        console.log(searchResultsJSON.items[i + pageOffset].volumeInfo.title);
+    }
+}
+
+//intialize current page to 0 so that the first call shows the first page
 let currentPage = 0;
+/*using a current page lets the user click the back button to return
+to the same page they were on instead of re running the search
+
+default paramenter indicates if no pageNumber param is passed, use the
+currentPage*/
 function showList(pageNumber = currentPage) {
     hideAll();
     currentPage = pageNumber;
 
-    console.log(pageNumber);
-    console.log("set search results here");
+    populateList(pageNumber);
 
     $("[id=bookList]").show();
     $("[id=pageNumberRow]").show();
 }
 
-function showDetails() {
+function showDetails(relativeIndex) {
     hideAll();
 
     console.log("set book details here");
@@ -69,3 +93,5 @@ function showBookshelf() {
     $("[id=bookshelf]").show();
     $("[id=backBtn]").show();
 }
+
+hideAll();
