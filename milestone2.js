@@ -5,7 +5,7 @@ function hideAll() {
     $("[id=backBtn]").hide();
     $("[id=pageNumberRow]").hide();
 }
-hideAll();
+// hideAll();
 
 //form the url used to call the Google Books api
 function formSearchURL(searchTerms) {
@@ -23,7 +23,6 @@ function formSearchURL(searchTerms) {
         }
     }
     url += URL_BACK;
-    // console.log(url);
     return url;
 }
 
@@ -39,25 +38,12 @@ function search() {
     }).then(function (response) {
         showList();
     });
-
-    //pretty sure i dont need these
-    // currentPage = 0;
-    // showList();
 }
 
+const resultsPerPage = 10;
 function populateList(pageNumber) {
-    const resultsPerPage = 10;
+    
     let pageOffset = pageNumber * resultsPerPage;
-
-    // let i = 0;
-    // $(`[id=img${i}]`).attr(
-    //     "src",
-    //     searchResultsJSON.items[i + pageOffset].volumeInfo.imageLinks
-    //         .smallThumbnail
-    // );
-    // $(`[id=title${i}]`).html(
-    //     searchResultsJSON.items[i + pageOffset].volumeInfo.title
-    // );
 
     //empty any book results in the list before repopulating
     $("[id=bookList]").empty();
@@ -84,6 +70,12 @@ function populateList(pageNumber) {
     }
 }
 
+// populateNumberRow(pageNumber){
+
+
+//     $("[id=pageNumberRow]").append();
+// }
+
 //intialize current page to 0 so that the first call shows the first page
 let currentPage = 0;
 /*using a current page lets the user click the back button to return
@@ -95,6 +87,7 @@ function showList(pageNumber = currentPage) {
     hideAll();
     currentPage = pageNumber;
 
+    // populateNumberRow(pageNumber);
     populateList(pageNumber);
 
     $("[id=bookList]").show();
