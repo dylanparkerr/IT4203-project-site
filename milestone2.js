@@ -32,6 +32,7 @@ let searchResultsJSON;
 function search() {
     const searchTerms = $("[id=searchInput]").val();
     const url = formSearchURL(searchTerms);
+
     $.get(url, function (data) {
         searchResultsJSON = data;
         console.log(data);
