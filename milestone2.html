@@ -56,20 +56,20 @@
                 <div id="navBar">
                     <button id="backBtn" onclick="showList()">Back</button>
                     <div id="pageNumberRow">
-                        <p class="pageNumber" onclick="showList(1)">1</p>
-                        <p class="pageNumber" onclick="showList(2)">2</p>
-                        <p class="pageNumber" onclick="showList(3)">3</p>
-                        <p class="pageNumber" onclick="showList(4)">4</p>
+                        <p class="pageNumber" onclick="showList(0)">1</p>
+                        <p class="pageNumber" onclick="showList(1)">2</p>
+                        <p class="pageNumber" onclick="showList(2)">3</p>
+                        <p class="pageNumber" onclick="showList(3)">4</p>
                     </div>
                 </div>
 
                 <div id="searchResult">
                     <div id="bookList">
-                        <div class="bookRes" id="res0" onclick="showDetails(0)">
-                            <img id="img0" src="-" alt="" />
-                            <a id="title0"></a>
-                        </div>
-                        <!-- this gets populated by results that look like this -->
+                        <!-- this gets populated by results that look like this, where '#' is the index of the loop -->
+                        <!-- <div class="bookRes" id="res#" onclick="showDetails(0)">
+                            <img id="img#" src="-" alt="" />
+                            <a id="title#"></a>
+                        </div> -->
                     </div>
 
                     <div id="bookDetails"></div>

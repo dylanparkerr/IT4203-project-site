@@ -45,7 +45,7 @@ function search() {
 }
 
 function populateList(pageNumber) {
-    const resultsPerPage = 5;
+    const resultsPerPage = 10;
     let pageOffset = pageNumber * resultsPerPage;
 
     // let i = 0;
@@ -60,8 +60,9 @@ function populateList(pageNumber) {
 
     //empty any book results in the list before repopulating
     $("[id=bookList]").empty();
-    //create containers for the number of results
+
     for (let i = 0; i < resultsPerPage; i++) {
+        //create containers for the number of results
         $("[id=bookList]").append(
             `<div class="bookRes" id="res${i}" onclick="showDetails(${i})"></div>`
         );
@@ -69,6 +70,8 @@ function populateList(pageNumber) {
             `<img id="img${i}" src="-" alt="" />`,
             `<a id="title${i}"></a>`
         );
+
+        //populate the newly created elements
         $(`[id=img${i}]`).attr(
             "src",
             searchResultsJSON.items[i + pageOffset].volumeInfo.imageLinks
