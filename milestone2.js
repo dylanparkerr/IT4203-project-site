@@ -1,3 +1,11 @@
+// used to set the number of results per page
+const resultsPerPage = 10;
+// store the JSON returned by a search for use when pulling detailed info
+let searchResultsJSON;
+// using a current page lets the user click the back button to return
+// to the same page they were on instead of re running the search
+let currentPage = 0;
+
 function hideAll() {
     $("[id=bookList]").hide();
     $("[id=bookDetails]").hide();
@@ -5,7 +13,6 @@ function hideAll() {
     $("[id=backBtn]").hide();
     $("[id=pageNumberRow]").hide();
 }
-// hideAll();
 
 //form the url used to call the Google Books api
 function formSearchURL(searchTerms) {
@@ -26,8 +33,6 @@ function formSearchURL(searchTerms) {
     return url;
 }
 
-// store the JSON returned by a search for use when pulling detailed info
-let searchResultsJSON;
 function search() {
     const searchTerms = $("[id=searchInput]").val();
     const url = formSearchURL(searchTerms);
@@ -40,14 +45,23 @@ function search() {
     });
 }
 
-const resultsPerPage = 10;
 function populateList(pageNumber) {
+    let numResultsToDisplay = resultsPerPage;
+    let remainder = searchResultsJSON.items.length % resultsPerPage;
+    if (
+        remainder > 0 &&
+        pageNumber ==
+            Math.ceil(searchResultsJSON.items.length / resultsPerPage) - 1
+    ) {
+        numResultsToDisplay = remainder;
+    }
+
     let pageOffset = pageNumber * resultsPerPage;
 
     //empty any book results in the list before repopulating
     $("[id=bookList]").empty();
 
-    for (let i = 0; i < resultsPerPage; i++) {
+    for (let i = 0; i < numResultsToDisplay; i++) {
         //create containers for the number of results
         $("[id=bookList]").append(
             `<div class="bookRes" id="res${i}" onclick="showDetails(${i})"></div>`
@@ -71,23 +85,35 @@ function populateList(pageNumber) {
     }
 }
 
-// populateNumberRow(pageNumber){
+function populateNumberRow(pageNumber) {
+    let numberOfPages = Math.ceil(
+        searchResultsJSON.items.length / resultsPerPage
+    );
 
-//     $("[id=pageNumberRow]").append();
-// }
+    $("[id=pageNumberRow]").empty();
+    console.log(searchResultsJSON.items.length);
 
-//intialize current page to 0 so that the first call shows the first page
-let currentPage = 0;
-/*using a current page lets the user click the back button to return
-to the same page they were on instead of re running the search
+    for (let i = 0; i < numberOfPages; i++) {
+        if (i === pageNumber) {
+            $("[id=pageNumberRow]").append(
+                `<p class="pageNumber" class="activePage" onclick="showList(${i})">${
+                    i + 1
+                }</p>`
+            );
+        } else {
+            $("[id=pageNumberRow]").append(
+                `<p class="pageNumber" onclick="showList(${i})">${i + 1}</p>`
+            );
+        }
+    }
+}
 
-default paramenter indicates if no pageNumber param is passed, use the
-currentPage*/
+// default paramenter indicates if no pageNumber is passed, use the currentPage
 function showList(pageNumber = currentPage) {
     hideAll();
     currentPage = pageNumber;
 
-    // populateNumberRow(pageNumber);
+    populateNumberRow(pageNumber);
     populateList(pageNumber);
 
     $("[id=bookList]").show();
@@ -112,4 +138,5 @@ function showBookshelf() {
     $("[id=backBtn]").show();
 }
 
+//initially hide the three main containers on the page
 hideAll();
