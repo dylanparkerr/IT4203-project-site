@@ -42,7 +42,6 @@ function search() {
 
 const resultsPerPage = 10;
 function populateList(pageNumber) {
-    
     let pageOffset = pageNumber * resultsPerPage;
 
     //empty any book results in the list before repopulating
@@ -62,7 +61,9 @@ function populateList(pageNumber) {
         $(`[id=img${i}]`).attr(
             "src",
             searchResultsJSON.items[i + pageOffset].volumeInfo.imageLinks
-                .smallThumbnail
+                ? searchResultsJSON.items[i + pageOffset].volumeInfo.imageLinks
+                      .smallThumbnail
+                : "/images/no-image-icon.png"
         );
         $(`[id=title${i}]`).html(
             searchResultsJSON.items[i + pageOffset].volumeInfo.title
@@ -71,7 +72,6 @@ function populateList(pageNumber) {
 }
 
 // populateNumberRow(pageNumber){
-
 
 //     $("[id=pageNumberRow]").append();
 // }
