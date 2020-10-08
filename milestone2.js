@@ -48,14 +48,35 @@ function populateList(pageNumber) {
     const resultsPerPage = 5;
     let pageOffset = pageNumber * resultsPerPage;
 
+    // let i = 0;
+    // $(`[id=img${i}]`).attr(
+    //     "src",
+    //     searchResultsJSON.items[i + pageOffset].volumeInfo.imageLinks
+    //         .smallThumbnail
+    // );
+    // $(`[id=title${i}]`).html(
+    //     searchResultsJSON.items[i + pageOffset].volumeInfo.title
+    // );
+
     //empty any book results in the list before repopulating
     $("[id=bookList]").empty();
     //create containers for the number of results
     for (let i = 0; i < resultsPerPage; i++) {
         $("[id=bookList]").append(
-            `<div class="bookRes" onclick="showDetails(${i})"></div>`
+            `<div class="bookRes" id="res${i}" onclick="showDetails(${i})"></div>`
         );
-        console.log(searchResultsJSON.items[i + pageOffset].volumeInfo.title);
+        $(`[id=res${i}]`).append(
+            `<img id="img${i}" src="-" alt="" />`,
+            `<a id="title${i}"></a>`
+        );
+        $(`[id=img${i}]`).attr(
+            "src",
+            searchResultsJSON.items[i + pageOffset].volumeInfo.imageLinks
+                .smallThumbnail
+        );
+        $(`[id=title${i}]`).html(
+            searchResultsJSON.items[i + pageOffset].volumeInfo.title
+        );
     }
 }
 
