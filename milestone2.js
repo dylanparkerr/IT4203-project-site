@@ -96,9 +96,9 @@ function populateNumberRow(pageNumber) {
     console.log(searchResultsJSON.items.length);
 
     for (let i = 0; i < numberOfPages; i++) {
-        if (i === pageNumber) {
+        if (i == pageNumber) {
             $("[id=pageNumberRow]").append(
-                `<p class="pageNumber" class="activePage" onclick="showList(${i})">${
+                `<p class="pageNumber activePage" onclick="showList(${i})">${
                     i + 1
                 }</p>`
             );
