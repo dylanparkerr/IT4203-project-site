@@ -68,7 +68,7 @@ function populateList(pageNumber) {
         );
         $(`[id=res${i}]`).append(
             `<img id="img${i}" src="-" alt="" />`,
-            `<a id="title${i}"></a>`
+            `<p id="title${i}"></p>`
         );
 
         //populate the newly created elements
@@ -83,6 +83,8 @@ function populateList(pageNumber) {
             searchResultsJSON.items[i + pageOffset].volumeInfo.title
         );
     }
+    //remove the bottom border that acts like a seperator from the last result
+    $(`[id=res${numResultsToDisplay - 1}]`).css("border-bottom", "none");
 }
 
 function populateNumberRow(pageNumber) {

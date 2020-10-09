@@ -454,10 +454,10 @@ tr:nth-child(even) {
 }
 
 .bookRes {
-    /* background-color: violet; */
+    display: block;
     width: 100%;
     height: 300px;
-    line-height: 300px;
+    line-height: 150px;
     border-bottom: 1px solid #e5e5e5;
 }
 .bookRes img {
@@ -467,13 +467,17 @@ tr:nth-child(even) {
     padding-right: 8%;
     border-right: 1px solid #e5e5e5;
 }
-.bookRes a {
+.bookRes p {
     display: inline-block;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 30px;
     padding-left: 20px;
-    overflow-wrap: anywhere;
+
+    width: 60%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
-.bookRes a:hover {
+.bookRes p:hover {
     text-decoration: underline;
 }
