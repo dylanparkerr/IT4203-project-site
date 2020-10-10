@@ -31,8 +31,10 @@ function formSearchURL(searchTerms) {
     return url;
 }
 
+// retrieves the search JSON and displays it as a list
 function search() {
     currentPage = 0;
+    //creates the API url dynamically 
     const searchTerms = $("[id=searchInput]").val();
     const url = formSearchURL(searchTerms);
 
@@ -44,6 +46,7 @@ function search() {
     });
 }
 
+// retrieves the bookshelf JSON and displays it as a list
 function bookshelf(){
     const url = "https://www.googleapis.com/books/v1/users/108498590000483866475/bookshelves/1001/volumes?&key=AIzaSyAapv3F22n1UHUtHh5bnUKM3vHm62bfvXg"
     $.get(url, function (data) {
@@ -60,6 +63,7 @@ function populateNumberRow(pageNumber) {
         searchResultsJSON.items.length / resultsPerPage
     );
 
+    //clear the current numbers including the 'active' page before repopulating
     $("[id=pageNumberRow]").empty();
 
     for (let i = 0; i < numberOfPages; i++) {
@@ -78,6 +82,8 @@ function populateNumberRow(pageNumber) {
 }
 
 function populateList(pageNumber) {
+    //ensures the corect number of book results are created based on the set results per page
+    //needed for showing number of results per page that is not evenly divided into 40
     let numResultsToDisplay = resultsPerPage;
     let remainder = searchResultsJSON.items.length % resultsPerPage;
     if (
@@ -88,6 +94,7 @@ function populateList(pageNumber) {
         numResultsToDisplay = remainder;
     }
 
+    // offset to add to the relative index on the page to get the actual index in the JSON object
     let pageOffset = pageNumber * resultsPerPage;
 
     //empty any book results in the list before repopulating
@@ -119,13 +126,48 @@ function populateList(pageNumber) {
     $(`[id=res${numResultsToDisplay - 1}]`).css("border-bottom", "none");
 }
 
+
+function populateBookshelf(){
+    const numOfBooks = bookshelfJSON.totalItems;
+
+    // clear any old results before repopulating
+    $("[id=bookshelf]").empty();
+
+    for(let i=0;i<numOfBooks;i++){
+        $("[id=bookshelf]").append(
+            `<div class="bookRes" id="shelfRes${i}" ></div>`
+        );
+        $(`[id=shelfRes${i}]`).append(
+            `<img id="shelfImg${i}" src="-" alt="" />`,
+            `<p id="shelfTitle${i}"onclick="showDetails(${i},'bookshelf')"></p>`
+        );
+
+        //populate the newly created elements
+        $(`[id=shelfImg${i}]`).attr(
+            "src",
+            bookshelfJSON.items[i].volumeInfo.imageLinks
+                ? bookshelfJSON.items[i].volumeInfo.imageLinks
+                      .smallThumbnail
+                : "/images/no-image-icon.png"
+        );
+        $(`[id=shelfTitle${i}]`).html(
+            bookshelfJSON.items[i].volumeInfo.title
+        );
+    }
+    //remove the bottom border that acts like a seperator from the last result
+    $(`[id=shelfRes${numOfBooks - 1}]`).css("border-bottom", "none");
+}
+
 function populateDetails(index,jsonToUse){
+    //sets the correct source JSON to use
     let sourceJSON;
     if(jsonToUse===SEARCH_JSON){
         sourceJSON = searchResultsJSON;
     }else if(jsonToUse===BOOKSHELF_JSON){
         sourceJSON = bookshelfJSON;
     }
+
+    //set each field on the details page if the entry has it
     $(`[id=detailsImg]`).attr(
         "src",
         sourceJSON.items[index].volumeInfo.imageLinks
@@ -136,7 +178,6 @@ function populateDetails(index,jsonToUse){
     $(`[id=detailsTitle]`).html(
         sourceJSON.items[index].volumeInfo.title ? sourceJSON.items[index].volumeInfo.title : ""
     );
-
     $(`[id=detailsSubTitle]`).html(
         sourceJSON.items[index].volumeInfo.subtitle ? sourceJSON.items[index].volumeInfo.subtitle : ""
     );
@@ -167,37 +208,6 @@ function populateDetails(index,jsonToUse){
     $(`[id=detailsMaturity]`).html(
         sourceJSON.items[index].volumeInfo.maturityRating ? sourceJSON.items[index].volumeInfo.maturityRating : ""
     );
-}
-
-function populateBookshelf(){
-    console.log('populate bookshelf');
-    const numOfBooks = bookshelfJSON.totalItems;
-
-    $("[id=bookshelf]").empty();
-
-    for(let i=0;i<numOfBooks;i++){
-        $("[id=bookshelf]").append(
-            `<div class="bookRes" id="shelfRes${i}" ></div>`
-        );
-        $(`[id=shelfRes${i}]`).append(
-            `<img id="shelfImg${i}" src="-" alt="" />`,
-            `<p id="shelfTitle${i}"onclick="showDetails(${i},'bookshelf')"></p>`
-        );
-
-        //populate the newly created elements
-        $(`[id=shelfImg${i}]`).attr(
-            "src",
-            bookshelfJSON.items[i].volumeInfo.imageLinks
-                ? bookshelfJSON.items[i].volumeInfo.imageLinks
-                      .smallThumbnail
-                : "/images/no-image-icon.png"
-        );
-        $(`[id=shelfTitle${i}]`).html(
-            bookshelfJSON.items[i].volumeInfo.title
-        );
-    }
-    //remove the bottom border that acts like a seperator from the last result
-    $(`[id=shelfRes${numOfBooks - 1}]`).css("border-bottom", "none");
 }
 
 // default paramenter indicates if no pageNumber is passed, use the currentPage
@@ -238,8 +248,6 @@ function hideAll() {
     $("[id=backBtn]").hide();
     $("[id=pageNumberRow]").hide();
 }
-
-
 
 //initially hide the three main containers on the page
 hideAll();
