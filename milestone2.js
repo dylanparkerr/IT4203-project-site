@@ -57,7 +57,7 @@ function bookshelf(){
     });
 }
 
-
+// dynamically creates page numbers and highlights which page is actice
 function populateNumberRow(pageNumber) {
     let numberOfPages = Math.ceil(
         searchResultsJSON.items.length / resultsPerPage
@@ -81,6 +81,7 @@ function populateNumberRow(pageNumber) {
     }
 }
 
+// populate the list used for search results before displaying
 function populateList(pageNumber) {
     //ensures the corect number of book results are created based on the set results per page
     //needed for showing number of results per page that is not evenly divided into 40
@@ -126,7 +127,7 @@ function populateList(pageNumber) {
     $(`[id=res${numResultsToDisplay - 1}]`).css("border-bottom", "none");
 }
 
-
+// populate the list used to show results on the bookshelf before displaying
 function populateBookshelf(){
     const numOfBooks = bookshelfJSON.totalItems;
 
@@ -158,6 +159,7 @@ function populateBookshelf(){
     $(`[id=shelfRes${numOfBooks - 1}]`).css("border-bottom", "none");
 }
 
+// populate the details from an entry before display
 function populateDetails(index,jsonToUse){
     //sets the correct source JSON to use
     let sourceJSON;
@@ -210,6 +212,7 @@ function populateDetails(index,jsonToUse){
     );
 }
 
+// show the list of search results
 // default paramenter indicates if no pageNumber is passed, use the currentPage
 function showList(pageNumber = currentPage) {
     hideAll();
@@ -222,6 +225,7 @@ function showList(pageNumber = currentPage) {
     $("[id=pageNumberRow]").show();
 }
 
+// show the details pane for a given volume
 function showDetails(relativeIndex, jsonToUse) {
     hideAll();
     const actualIndex = relativeIndex+(currentPage*resultsPerPage);
@@ -232,6 +236,7 @@ function showDetails(relativeIndex, jsonToUse) {
     $("[id=backBtn]").show();
 }
 
+// show the bookshelf results
 function showBookshelf() {
     hideAll();
 
@@ -241,6 +246,7 @@ function showBookshelf() {
     $("[id=backBtn]").show();
 }
 
+// hide all the major divs and controls
 function hideAll() {
     $("[id=bookList]").hide();
     $("[id=bookDetails]").hide();
