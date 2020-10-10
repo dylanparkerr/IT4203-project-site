@@ -122,10 +122,8 @@ function populateList(pageNumber) {
 function populateDetails(index,jsonToUse){
     let sourceJSON;
     if(jsonToUse===SEARCH_JSON){
-        console.log("search");
         sourceJSON = searchResultsJSON;
     }else if(jsonToUse===BOOKSHELF_JSON){
-        console.log("bookshelf");
         sourceJSON = bookshelfJSON;
     }
     $(`[id=detailsImg]`).attr(
@@ -136,49 +134,38 @@ function populateDetails(index,jsonToUse){
             : "/images/no-image-icon.png"
     );
     $(`[id=detailsTitle]`).html(
-        sourceJSON.items[index].volumeInfo.title
+        sourceJSON.items[index].volumeInfo.title ? sourceJSON.items[index].volumeInfo.title : ""
     );
 
-    //clears previous value if the next book doesnt have one for
-    $(`[id=detailsSubTitle]`).empty();
     $(`[id=detailsSubTitle]`).html(
-        sourceJSON.items[index].volumeInfo.subtitle
+        sourceJSON.items[index].volumeInfo.subtitle ? sourceJSON.items[index].volumeInfo.subtitle : ""
     );
-    $(`[id=detailsAuth]`).empty();
     $(`[id=detailsAuth]`).html(
-        sourceJSON.items[index].volumeInfo.authors
+        sourceJSON.items[index].volumeInfo.authors ? sourceJSON.items[index].volumeInfo.authors : ""
     );
-    $(`[id=detailsYear]`).empty();
     $(`[id=detailsYear]`).html(
-        sourceJSON.items[index].volumeInfo.publishedDate
+        sourceJSON.items[index].volumeInfo.publishedDate ? sourceJSON.items[index].volumeInfo.publishedDate : ""
     );
-    $(`[id=detailsISBN10]`).empty();
     $(`[id=detailsISBN10]`).html(
-        sourceJSON.items[index].volumeInfo.industryIdentifiers[0].identifier
+        sourceJSON.items[index].volumeInfo.industryIdentifiers ? sourceJSON.items[index].volumeInfo.industryIdentifiers[0].identifier : ""
     );
-    $(`[id=detailsISBN13]`).empty();
     $(`[id=detailsISBN13]`).html(
-        sourceJSON.items[index].volumeInfo.industryIdentifiers[1].identifier
+        sourceJSON.items[index].volumeInfo.industryIdentifiers ? sourceJSON.items[index].volumeInfo.industryIdentifiers[1].identifier : ""
     );
-    $(`[id=detailsLang]`).empty();
     $(`[id=detailsLang]`).html(
-        sourceJSON.items[index].volumeInfo.language
+        sourceJSON.items[index].volumeInfo.language ? sourceJSON.items[index].volumeInfo.language : ""
     );
-    $(`[id=detailsPages]`).empty();
     $(`[id=detailsPages]`).html(
-        sourceJSON.items[index].volumeInfo.pageCount
+        sourceJSON.items[index].volumeInfo.pageCount ? sourceJSON.items[index].volumeInfo.pageCount : ""
     );
-    $(`[id=detailsPub]`).empty();
     $(`[id=detailsPub]`).html(
-        sourceJSON.items[index].volumeInfo.publisher
+        sourceJSON.items[index].volumeInfo.publisher ? sourceJSON.items[index].volumeInfo.publisher : ""
     );
-    $(`[id=detailsCat]`).empty();
     $(`[id=detailsCat]`).html(
-        sourceJSON.items[index].volumeInfo.categories
+        sourceJSON.items[index].volumeInfo.categories ? sourceJSON.items[index].volumeInfo.categories : ""
     );
-    $(`[id=detailsMaturity]`).empty();
     $(`[id=detailsMaturity]`).html(
-        sourceJSON.items[index].volumeInfo.maturityRating
+        sourceJSON.items[index].volumeInfo.maturityRating ? sourceJSON.items[index].volumeInfo.maturityRating : ""
     );
 }
 
