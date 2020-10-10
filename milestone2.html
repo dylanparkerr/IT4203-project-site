@@ -49,7 +49,7 @@
                             Search
                         </button>
                     </div>
-                    <button id="bookshelfBtn" onclick="showBookshelf()">
+                    <button id="bookshelfBtn" onclick="bookshelf()">
                         My Bookshelf
                     </button>
                     <div class="floatclear"></div>
@@ -68,7 +68,7 @@
                 <div id="searchResult">
                     <div id="bookList">
                         <!-- this gets populated by results that look like this, where '#' is the index of the loop -->
-                        <!-- <div class="bookRes" id="res#" onclick="showDetails(0)">
+                        <!-- <div class="bookRes" id="res#" onclick="showDetails(#)">
                             <img id="img#" src="-" alt="" />
                             <p id="title#"></p>
                         </div> -->
@@ -119,9 +119,16 @@
                                 <td id="detailsMaturity" ></td>
                             </tr>
                         </table>
+                        <div style="clear: both;"></div>
                     </div>
-                    <div style="clear: both;"></div>
-                    <div id="bookshelf"></div>
+                    
+                    <div id="bookshelf">
+                        <!-- this gets populated by results that look like this, where '#' is the index of the loop -->
+                        <!-- <div class="bookRes" id="shelfRes#" onclick="showDetails(#)">
+                            <img id="shelfImg#" src="-" alt="" />
+                            <p id="shelfTitle#"></p>
+                        </div> -->
+                    </div>
                 </div>
             </div>
         </div>
