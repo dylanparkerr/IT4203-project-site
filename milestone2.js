@@ -1,5 +1,8 @@
 // used to set the number of results per page
 const resultsPerPage = 10;
+// magic strings to let populateDetails() know what JSON to use
+const SEARCH_JSON = 'search';
+const BOOKSHELF_JSON = 'bookshelf';
 // store the JSON returned by a search for use when pulling detailed info
 let searchResultsJSON;
 // store the JSON returned from the bookshelf to keep seperate from search
@@ -97,7 +100,7 @@ function populateList(pageNumber) {
         );
         $(`[id=res${i}]`).append(
             `<img id="img${i}" src="-" alt="" />`,
-            `<p id="title${i}"onclick="showDetails(${i})"></p>`
+            `<p id="title${i}"onclick="showDetails(${i},'search')"></p>`
         );
 
         //populate the newly created elements
@@ -116,58 +119,66 @@ function populateList(pageNumber) {
     $(`[id=res${numResultsToDisplay - 1}]`).css("border-bottom", "none");
 }
 
-function populateDetails(index){
+function populateDetails(index,jsonToUse){
+    let sourceJSON;
+    if(jsonToUse===SEARCH_JSON){
+        console.log("search");
+        sourceJSON = searchResultsJSON;
+    }else if(jsonToUse===BOOKSHELF_JSON){
+        console.log("bookshelf");
+        sourceJSON = bookshelfJSON;
+    }
     $(`[id=detailsImg]`).attr(
         "src",
-        searchResultsJSON.items[index].volumeInfo.imageLinks
-            ? searchResultsJSON.items[index].volumeInfo.imageLinks
+        sourceJSON.items[index].volumeInfo.imageLinks
+            ? sourceJSON.items[index].volumeInfo.imageLinks
                   .smallThumbnail
             : "/images/no-image-icon.png"
     );
     $(`[id=detailsTitle]`).html(
-        searchResultsJSON.items[index].volumeInfo.title
+        sourceJSON.items[index].volumeInfo.title
     );
 
     //clears previous value if the next book doesnt have one for
     $(`[id=detailsSubTitle]`).empty();
     $(`[id=detailsSubTitle]`).html(
-        searchResultsJSON.items[index].volumeInfo.subtitle
+        sourceJSON.items[index].volumeInfo.subtitle
     );
     $(`[id=detailsAuth]`).empty();
     $(`[id=detailsAuth]`).html(
-        searchResultsJSON.items[index].volumeInfo.authors
+        sourceJSON.items[index].volumeInfo.authors
     );
     $(`[id=detailsYear]`).empty();
     $(`[id=detailsYear]`).html(
-        searchResultsJSON.items[index].volumeInfo.publishedDate
+        sourceJSON.items[index].volumeInfo.publishedDate
     );
     $(`[id=detailsISBN10]`).empty();
     $(`[id=detailsISBN10]`).html(
-        searchResultsJSON.items[index].volumeInfo.industryIdentifiers[0].identifier
+        sourceJSON.items[index].volumeInfo.industryIdentifiers[0].identifier
     );
     $(`[id=detailsISBN13]`).empty();
     $(`[id=detailsISBN13]`).html(
-        searchResultsJSON.items[index].volumeInfo.industryIdentifiers[1].identifier
+        sourceJSON.items[index].volumeInfo.industryIdentifiers[1].identifier
     );
     $(`[id=detailsLang]`).empty();
     $(`[id=detailsLang]`).html(
-        searchResultsJSON.items[index].volumeInfo.language
+        sourceJSON.items[index].volumeInfo.language
     );
     $(`[id=detailsPages]`).empty();
     $(`[id=detailsPages]`).html(
-        searchResultsJSON.items[index].volumeInfo.pageCount
+        sourceJSON.items[index].volumeInfo.pageCount
     );
     $(`[id=detailsPub]`).empty();
     $(`[id=detailsPub]`).html(
-        searchResultsJSON.items[index].volumeInfo.publisher
+        sourceJSON.items[index].volumeInfo.publisher
     );
     $(`[id=detailsCat]`).empty();
     $(`[id=detailsCat]`).html(
-        searchResultsJSON.items[index].volumeInfo.categories
+        sourceJSON.items[index].volumeInfo.categories
     );
     $(`[id=detailsMaturity]`).empty();
     $(`[id=detailsMaturity]`).html(
-        searchResultsJSON.items[index].volumeInfo.maturityRating
+        sourceJSON.items[index].volumeInfo.maturityRating
     );
 }
 
@@ -183,7 +194,7 @@ function populateBookshelf(){
         );
         $(`[id=shelfRes${i}]`).append(
             `<img id="shelfImg${i}" src="-" alt="" />`,
-            `<p id="shelfTitle${i}"onclick="showDetails(${i})"></p>`
+            `<p id="shelfTitle${i}"onclick="showDetails(${i},'bookshelf')"></p>`
         );
 
         //populate the newly created elements
@@ -214,11 +225,11 @@ function showList(pageNumber = currentPage) {
     $("[id=pageNumberRow]").show();
 }
 
-function showDetails(relativeIndex) {
+function showDetails(relativeIndex, jsonToUse) {
     hideAll();
     const actualIndex = relativeIndex+(currentPage*resultsPerPage);
 
-    populateDetails(actualIndex);
+    populateDetails(actualIndex,jsonToUse);
 
     $("[id=bookDetails]").show();
     $("[id=backBtn]").show();
