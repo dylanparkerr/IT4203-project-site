@@ -6,13 +6,6 @@ let searchResultsJSON;
 // to the same page they were on instead of re running the search
 let currentPage = 0;
 
-function hideAll() {
-    $("[id=bookList]").hide();
-    $("[id=bookDetails]").hide();
-    $("[id=bookshelf]").hide();
-    $("[id=backBtn]").hide();
-    $("[id=pageNumberRow]").hide();
-}
 
 //form the url used to call the Google Books api
 function formSearchURL(searchTerms) {
@@ -43,6 +36,29 @@ function search() {
     }).then(function (response) {
         showList();
     });
+}
+
+function populateNumberRow(pageNumber) {
+    let numberOfPages = Math.ceil(
+        searchResultsJSON.items.length / resultsPerPage
+    );
+
+    $("[id=pageNumberRow]").empty();
+    console.log(searchResultsJSON.items.length);
+
+    for (let i = 0; i < numberOfPages; i++) {
+        if (i == pageNumber) {
+            $("[id=pageNumberRow]").append(
+                `<p class="pageNumber activePage" onclick="showList(${i})">${
+                    i + 1
+                }</p>`
+            );
+        } else {
+            $("[id=pageNumberRow]").append(
+                `<p class="pageNumber" onclick="showList(${i})">${i + 1}</p>`
+            );
+        }
+    }
 }
 
 function populateList(pageNumber) {
@@ -87,27 +103,44 @@ function populateList(pageNumber) {
     $(`[id=res${numResultsToDisplay - 1}]`).css("border-bottom", "none");
 }
 
-function populateNumberRow(pageNumber) {
-    let numberOfPages = Math.ceil(
-        searchResultsJSON.items.length / resultsPerPage
+function populateDetails(index){
+    $(`[id=detailsImg]`).attr(
+        "src",
+        searchResultsJSON.items[index].volumeInfo.imageLinks
+            ? searchResultsJSON.items[index].volumeInfo.imageLinks
+                  .smallThumbnail
+            : "/images/no-image-icon.png"
     );
-
-    $("[id=pageNumberRow]").empty();
-    console.log(searchResultsJSON.items.length);
-
-    for (let i = 0; i < numberOfPages; i++) {
-        if (i == pageNumber) {
-            $("[id=pageNumberRow]").append(
-                `<p class="pageNumber activePage" onclick="showList(${i})">${
-                    i + 1
-                }</p>`
-            );
-        } else {
-            $("[id=pageNumberRow]").append(
-                `<p class="pageNumber" onclick="showList(${i})">${i + 1}</p>`
-            );
-        }
-    }
+    $(`[id=detailsTitle]`).html(
+        searchResultsJSON.items[index].volumeInfo.title
+    );
+    $(`[id=detailsSubTitle]`).html(
+        searchResultsJSON.items[index].volumeInfo.subtitle
+    );
+    $(`[id=detailsAuth]`).html(
+        searchResultsJSON.items[index].volumeInfo.authors
+    );
+    $(`[id=detailsYear]`).html(
+        searchResultsJSON.items[index].volumeInfo.publishedDate
+    );
+    $(`[id=detailsISBN10]`).html(
+        searchResultsJSON.items[index].volumeInfo.industryIdentifiers[0].identifier
+    );
+    $(`[id=detailsISBN13]`).html(
+        searchResultsJSON.items[index].volumeInfo.industryIdentifiers[1].identifier
+    );
+    $(`[id=detailsLang]`).html(
+        searchResultsJSON.items[index].volumeInfo.language
+    );
+    $(`[id=detailsPages]`).html(
+        searchResultsJSON.items[index].volumeInfo.pageCount
+    );
+    $(`[id=detailsPub]`).html(
+        searchResultsJSON.items[index].volumeInfo.publisher
+    );
+    $(`[id=detailsCat]`).html(
+        searchResultsJSON.items[index].volumeInfo.categories
+    );
 }
 
 // default paramenter indicates if no pageNumber is passed, use the currentPage
@@ -124,8 +157,9 @@ function showList(pageNumber = currentPage) {
 
 function showDetails(relativeIndex) {
     hideAll();
+    const actualIndex = relativeIndex+(currentPage*resultsPerPage);
 
-    console.log("set book details here");
+    populateDetails(actualIndex);
 
     $("[id=bookDetails]").show();
     $("[id=backBtn]").show();
@@ -139,6 +173,15 @@ function showBookshelf() {
     $("[id=bookshelf]").show();
     $("[id=backBtn]").show();
 }
+
+function hideAll() {
+    $("[id=bookList]").hide();
+    $("[id=bookDetails]").hide();
+    $("[id=bookshelf]").hide();
+    $("[id=backBtn]").hide();
+    $("[id=pageNumberRow]").hide();
+}
+
 
 //initially hide the three main containers on the page
 hideAll();
