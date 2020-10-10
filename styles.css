@@ -473,6 +473,9 @@ tr:nth-child(even) {
 }
 
 /* book details formats */
+#bookDetails {
+    overflow: auto;
+}
 #detailsLeftWrap {
     border-right: 1px solid #e5e5e5;
     width: 40%;
@@ -481,7 +484,10 @@ tr:nth-child(even) {
     float: left;
 }
 #detailsImg {
-    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
     display: block;
 }
 .bookTitle {
@@ -494,4 +500,14 @@ tr:nth-child(even) {
     font-size: 20px;
     font-weight: 400;
     font-style: italic;
+}
+#detailsTable {
+    border-spacing: 0;
+    width: 53%;
+}
+#detailsTable td {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 5px;
 }

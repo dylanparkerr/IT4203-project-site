@@ -80,11 +80,11 @@ function populateList(pageNumber) {
     for (let i = 0; i < numResultsToDisplay; i++) {
         //create containers for the number of results
         $("[id=bookList]").append(
-            `<div class="bookRes" id="res${i}" onclick="showDetails(${i})"></div>`
+            `<div class="bookRes" id="res${i}" ></div>`
         );
         $(`[id=res${i}]`).append(
             `<img id="img${i}" src="-" alt="" />`,
-            `<p id="title${i}"></p>`
+            `<p id="title${i}"onclick="showDetails(${i})"></p>`
         );
 
         //populate the newly created elements
@@ -114,32 +114,47 @@ function populateDetails(index){
     $(`[id=detailsTitle]`).html(
         searchResultsJSON.items[index].volumeInfo.title
     );
+
+    //clears previous value if the next book doesnt have one for
+    $(`[id=detailsSubTitle]`).empty();
     $(`[id=detailsSubTitle]`).html(
         searchResultsJSON.items[index].volumeInfo.subtitle
     );
+    $(`[id=detailsAuth]`).empty();
     $(`[id=detailsAuth]`).html(
         searchResultsJSON.items[index].volumeInfo.authors
     );
+    $(`[id=detailsYear]`).empty();
     $(`[id=detailsYear]`).html(
         searchResultsJSON.items[index].volumeInfo.publishedDate
     );
+    $(`[id=detailsISBN10]`).empty();
     $(`[id=detailsISBN10]`).html(
         searchResultsJSON.items[index].volumeInfo.industryIdentifiers[0].identifier
     );
+    $(`[id=detailsISBN13]`).empty();
     $(`[id=detailsISBN13]`).html(
         searchResultsJSON.items[index].volumeInfo.industryIdentifiers[1].identifier
     );
+    $(`[id=detailsLang]`).empty();
     $(`[id=detailsLang]`).html(
         searchResultsJSON.items[index].volumeInfo.language
     );
+    $(`[id=detailsPages]`).empty();
     $(`[id=detailsPages]`).html(
         searchResultsJSON.items[index].volumeInfo.pageCount
     );
+    $(`[id=detailsPub]`).empty();
     $(`[id=detailsPub]`).html(
         searchResultsJSON.items[index].volumeInfo.publisher
     );
+    $(`[id=detailsCat]`).empty();
     $(`[id=detailsCat]`).html(
         searchResultsJSON.items[index].volumeInfo.categories
+    );
+    $(`[id=detailsMaturity]`).empty();
+    $(`[id=detailsMaturity]`).html(
+        searchResultsJSON.items[index].volumeInfo.maturityRating
     );
 }
 
