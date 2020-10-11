@@ -108,7 +108,7 @@ function populateList(pageNumber) {
         );
         $(`[id=res${i}]`).append(
             `<img id="img${i}" src="-" alt="" />`,
-            `<p id="title${i}"onclick="showDetails(${i},'search')"></p>`
+            `<p id="title${i}"onclick="showDetails(${i},'${SEARCH_JSON}')"></p>`
         );
 
         //populate the newly created elements
@@ -140,7 +140,7 @@ function populateBookshelf(){
         );
         $(`[id=shelfRes${i}]`).append(
             `<img id="shelfImg${i}" src="-" alt="" />`,
-            `<p id="shelfTitle${i}"onclick="showDetails(${i},'bookshelf')"></p>`
+            `<p id="shelfTitle${i}"onclick="showDetails(${i},'${BOOKSHELF_JSON}')"></p>`
         );
 
         //populate the newly created elements
