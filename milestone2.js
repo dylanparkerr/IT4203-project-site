@@ -8,7 +8,7 @@ let searchResultsJSON;
 // store the JSON returned from the bookshelf to keep seperate from search
 let bookshelfJSON;
 // using a current page lets the user click the back button to return
-// to the same page they were on instead of re running the search
+// to the same page they were on instead of re-running the search
 let currentPage = 0;
 
 
@@ -40,7 +40,7 @@ function search() {
 
     $.get(url, function (data) {
         searchResultsJSON = data;
-        console.log(data);
+        // console.log(data);
     }).then(function (response) {
         showList();
     });
@@ -51,7 +51,7 @@ function bookshelf(){
     const url = "https://www.googleapis.com/books/v1/users/108498590000483866475/bookshelves/1001/volumes?&key=AIzaSyAapv3F22n1UHUtHh5bnUKM3vHm62bfvXg"
     $.get(url, function (data) {
         bookshelfJSON = data;
-        console.log(data);
+        // console.log(data);
     }).then(function (response) {
         showBookshelf();
     });
@@ -135,6 +135,7 @@ function populateBookshelf(){
     $("[id=bookshelf]").empty();
 
     for(let i=0;i<numOfBooks;i++){
+        //create new containers for the book results
         $("[id=bookshelf]").append(
             `<div class="bookRes" id="shelfRes${i}" ></div>`
         );
@@ -169,7 +170,6 @@ function populateDetails(index,jsonToUse){
         sourceJSON = bookshelfJSON;
     }
 
-    console.log(sourceJSON);
     //set each field on the details page if the entry has it
     $(`[id=detailsImg]`).attr(
         "src",
@@ -216,8 +216,8 @@ function populateDetails(index,jsonToUse){
 // show the list of search results
 // default paramenter indicates if no pageNumber is passed, use the currentPage
 function showList(pageNumber = currentPage) {
-    hideAll();
     currentPage = pageNumber;
+    hideAll();
 
     populateNumberRow(pageNumber);
     populateList(pageNumber);
@@ -238,13 +238,14 @@ function showBookshelf() {
 
 // show the details pane for a given volume
 function showDetails(relativeIndex, jsonToUse) {
-    hideAll();
     let actualIndex;
     if(jsonToUse===SEARCH_JSON){
         actualIndex = relativeIndex+(currentPage*resultsPerPage);
     }else if(jsonToUse===BOOKSHELF_JSON){
         actualIndex = relativeIndex;
     }
+
+    hideAll();
     
     populateDetails(actualIndex,jsonToUse);
 
@@ -261,5 +262,5 @@ function hideAll() {
     $("[id=pageNumberRow]").hide();
 }
 
-//initially hide the three main containers on the page
+//initially hide main containers and controls on the page
 hideAll();
