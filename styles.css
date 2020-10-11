@@ -215,9 +215,6 @@ tr:nth-child(even) {
     border-radius: 10px;
 }
 
- {
-} /*bookmark*/
-
 /* source 1 */
 #itbsLeft {
     border-right: 1px solid #e5e5e5;
@@ -322,7 +319,6 @@ tr:nth-child(even) {
 }
 
 /* milestone 2 page */
-
 #search-header {
     height: 40px;
     width: 70%;
@@ -345,7 +341,6 @@ tr:nth-child(even) {
     border-bottom-right-radius: 10px;
     margin-right: 0;
     float: left;
-    /* text-align: center; */
 }
 #search-body input {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -390,7 +385,6 @@ tr:nth-child(even) {
 }
 
 #navBar {
-    /* background-color: grey; */
     width: 100%;
     height: 30px;
     margin-top: 170px;
@@ -412,7 +406,6 @@ tr:nth-child(even) {
     left: 0;
     right: 0;
     margin: auto;
-    /* background-color: indigo; */
     height: 100%;
     width: 80%;
     text-align: center;
