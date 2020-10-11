@@ -68,8 +68,8 @@ $.getJSON("https://www.googleapis.com/books/v1/volumes/Wfan6L9RGgYC", function (
 
     $("[id=gsAuth]").html(data.volumeInfo.authors);
     $("[id=gsYear]").html(data.volumeInfo.publishedDate);
-    $("[id=gsISBN10]").html(data.volumeInfo.industryIdentifiers[1].identifier);
-    $("[id=gsISBN13]").html(data.volumeInfo.industryIdentifiers[0].identifier);
+    $("[id=gsISBN10]").html(data.volumeInfo.industryIdentifiers[0].identifier);
+    $("[id=gsISBN13]").html(data.volumeInfo.industryIdentifiers[1].identifier);
     $("[id=gsLang]").html(data.volumeInfo.language);
     $("[id=gsPages]").html(data.volumeInfo.pageCount);
     $("[id=gsPub]").html(data.volumeInfo.publisher);

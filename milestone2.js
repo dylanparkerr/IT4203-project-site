@@ -190,10 +190,10 @@ function populateDetails(index,jsonToUse){
         sourceJSON.items[index].volumeInfo.publishedDate ? sourceJSON.items[index].volumeInfo.publishedDate : ""
     );
     $(`[id=detailsISBN10]`).html(
-        sourceJSON.items[index].volumeInfo.industryIdentifiers ? sourceJSON.items[index].volumeInfo.industryIdentifiers[0].identifier : ""
+        sourceJSON.items[index].volumeInfo.industryIdentifiers ? sourceJSON.items[index].volumeInfo.industryIdentifiers[1].identifier : ""
     );
     $(`[id=detailsISBN13]`).html(
-        sourceJSON.items[index].volumeInfo.industryIdentifiers ? sourceJSON.items[index].volumeInfo.industryIdentifiers[1].identifier : ""
+        sourceJSON.items[index].volumeInfo.industryIdentifiers ? sourceJSON.items[index].volumeInfo.industryIdentifiers[0].identifier : ""
     );
     $(`[id=detailsLang]`).html(
         sourceJSON.items[index].volumeInfo.language ? sourceJSON.items[index].volumeInfo.language : ""
