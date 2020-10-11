@@ -226,6 +226,16 @@ function showList(pageNumber = currentPage) {
     $("[id=pageNumberRow]").show();
 }
 
+// show the bookshelf results
+function showBookshelf() {
+    hideAll();
+
+    populateBookshelf();
+
+    $("[id=bookshelf]").show();
+    $("[id=backBtn]").show();
+}
+
 // show the details pane for a given volume
 function showDetails(relativeIndex, jsonToUse) {
     hideAll();
@@ -239,16 +249,6 @@ function showDetails(relativeIndex, jsonToUse) {
     populateDetails(actualIndex,jsonToUse);
 
     $("[id=bookDetails]").show();
-    $("[id=backBtn]").show();
-}
-
-// show the bookshelf results
-function showBookshelf() {
-    hideAll();
-
-    populateBookshelf();
-
-    $("[id=bookshelf]").show();
     $("[id=backBtn]").show();
 }
 
