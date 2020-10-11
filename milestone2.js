@@ -169,6 +169,7 @@ function populateDetails(index,jsonToUse){
         sourceJSON = bookshelfJSON;
     }
 
+    console.log(sourceJSON);
     //set each field on the details page if the entry has it
     $(`[id=detailsImg]`).attr(
         "src",
@@ -228,8 +229,13 @@ function showList(pageNumber = currentPage) {
 // show the details pane for a given volume
 function showDetails(relativeIndex, jsonToUse) {
     hideAll();
-    const actualIndex = relativeIndex+(currentPage*resultsPerPage);
-
+    let actualIndex;
+    if(jsonToUse===SEARCH_JSON){
+        actualIndex = relativeIndex+(currentPage*resultsPerPage);
+    }else if(jsonToUse===BOOKSHELF_JSON){
+        actualIndex = relativeIndex;
+    }
+    
     populateDetails(actualIndex,jsonToUse);
 
     $("[id=bookDetails]").show();
