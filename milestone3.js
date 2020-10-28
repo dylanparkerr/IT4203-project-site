@@ -40,8 +40,9 @@ function search() {
 
     $.get(url, function (data) {
         searchResultsJSON = data;
-        // console.log(data);
     }).then(function (response) {
+        //hide details so searching after looking at bookshelf removes old details
+        $("[id=bookDetails]").hide();
         showList();
     });
 }
@@ -104,27 +105,20 @@ function populateList(pageNumber) {
     for (let i = 0; i < numResultsToDisplay; i++) {
         //create containers for the number of results
         $("[id=bookList]").append(
-            `<div class="bookRes" id="res${i}" ></div>`
+            `<div class="limitedBookRes" id="res${i}" ></div>`
         );
         $(`[id=res${i}]`).append(
-            `<img id="img${i}" src="-" alt="" />`,
             `<p id="title${i}"onclick="showDetails(${i},'${SEARCH_JSON}')"></p>`
         );
 
         //populate the newly created elements
-        $(`[id=img${i}]`).attr(
-            "src",
-            searchResultsJSON.items[i + pageOffset].volumeInfo.imageLinks
-                ? searchResultsJSON.items[i + pageOffset].volumeInfo.imageLinks
-                      .smallThumbnail
-                : "/images/no-image-icon.png"
-        );
         $(`[id=title${i}]`).html(
             searchResultsJSON.items[i + pageOffset].volumeInfo.title
         );
     }
     //remove the bottom border that acts like a seperator from the last result
     $(`[id=res${numResultsToDisplay - 1}]`).css("border-bottom", "none");
+    $(`[id=res${numResultsToDisplay - 1}]`).css("border-radius", "0px 0px 10px 10px");
 }
 
 // populate the list used to show results on the bookshelf before displaying
@@ -137,21 +131,13 @@ function populateBookshelf(){
     for(let i=0;i<numOfBooks;i++){
         //create new containers for the book results
         $("[id=bookshelf]").append(
-            `<div class="bookRes" id="shelfRes${i}" ></div>`
+            `<div class="limitedBookRes" id="shelfRes${i}" ></div>`
         );
         $(`[id=shelfRes${i}]`).append(
-            `<img id="shelfImg${i}" src="-" alt="" />`,
             `<p id="shelfTitle${i}"onclick="showDetails(${i},'${BOOKSHELF_JSON}')"></p>`
         );
 
         //populate the newly created elements
-        $(`[id=shelfImg${i}]`).attr(
-            "src",
-            bookshelfJSON.items[i].volumeInfo.imageLinks
-                ? bookshelfJSON.items[i].volumeInfo.imageLinks
-                      .smallThumbnail
-                : "/images/no-image-icon.png"
-        );
         $(`[id=shelfTitle${i}]`).html(
             bookshelfJSON.items[i].volumeInfo.title
         );
@@ -217,10 +203,10 @@ function populateDetails(index,jsonToUse){
 // default paramenter indicates if no pageNumber is passed, use the currentPage
 function showList(pageNumber = currentPage) {
     currentPage = pageNumber;
-    hideAll();
-
     populateNumberRow(pageNumber);
     populateList(pageNumber);
+
+    $("[id=bookshelf]").hide();
 
     $("[id=bookList]").show();
     $("[id=pageNumberRow]").show();
@@ -228,12 +214,13 @@ function showList(pageNumber = currentPage) {
 
 // show the bookshelf results
 function showBookshelf() {
-    hideAll();
-
     populateBookshelf();
 
+    $("[id=pageNumberRow]").hide();
+    $("[id=bookList]").hide();
+    $("[id=bookDetails]").hide();
+
     $("[id=bookshelf]").show();
-    $("[id=backBtn]").show();
 }
 
 // show the details pane for a given volume
@@ -245,22 +232,15 @@ function showDetails(relativeIndex, jsonToUse) {
         actualIndex = relativeIndex;
     }
 
-    hideAll();
-    
     populateDetails(actualIndex,jsonToUse);
 
     $("[id=bookDetails]").show();
-    $("[id=backBtn]").show();
 }
 
-// hide all the major divs and controls
-function hideAll() {
-    $("[id=bookList]").hide();
-    $("[id=bookDetails]").hide();
-    $("[id=bookshelf]").hide();
-    $("[id=backBtn]").hide();
-    $("[id=pageNumberRow]").hide();
-}
 
-//initially hide main containers and controls on the page
-hideAll();
+//only need the booklist hidden when the page loads
+$("[id=bookDetails]").hide();
+$("[id=bookshelf]").hide();
+$("[id=backBtn]").hide();
+$("[id=bookList]").hide();
+$("[id=pageNumberRow]").hide();

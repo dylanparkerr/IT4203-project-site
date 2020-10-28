@@ -52,7 +52,6 @@
                 </div>
 
                 <div id="navBar">
-                    <button id="backBtn" onclick="showList()">Back</button>
                     <div id="pageNumberRow">
                         <!-- <p class="pageNumber" onclick="showList(0)">1</p>
                         <p class="pageNumber" onclick="showList(1)">2</p>
@@ -64,9 +63,15 @@
                 <div id="searchResult">
                     <div id="bookList">
                         <!-- this gets populated by results that look like this, where '#' is the index of the loop -->
-                        <!-- <div class="bookRes" id="res#" onclick="showDetails(#)">
-                            <img id="img#" src="-" alt="" />
+                        <!-- <div class="limitedBookRes" id="res#" onclick="showDetails(#)">
                             <p id="title#"></p>
+                        </div> -->
+                    </div>
+
+                    <div id="bookshelf">
+                        <!-- this gets populated by results that look like this, where '#' is the index of the loop -->
+                        <!-- <div class="limitedBookRes" id="shelfRes#" onclick="showDetails(#)">
+                            <p id="shelfTitle#"></p>
                         </div> -->
                     </div>
 
@@ -118,13 +123,11 @@
                         <div style="clear: both;"></div>
                     </div>
                     
-                    <div id="bookshelf">
-                        
-                    </div>
+                    
                 </div>
             </div>
         </div>
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="milestone2.js"></script>
+    <script src="milestone3.js"></script>
 </html>
