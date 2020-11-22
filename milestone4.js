@@ -1,8 +1,9 @@
-// used to set the number of results per page
-const resultsPerPage = 10;
+// used to set the increment of results per load
+const resultsIncrement = 10;
+let currentNumResults = resultsIncrement;
 // magic strings to let populateDetails() know what JSON to use
 const SEARCH_JSON = 'search';
-const BOOKSHELF_JSON = 'bookshelf';
+const RECOMMEND_JSON = 'recommend';
 // store the JSON returned by a search for use when pulling detailed info
 let searchResultsJSON;
 // store the JSON returned from the bookshelf to keep seperate from search
@@ -11,6 +12,8 @@ let recommendJSON;
 // to the same page they were on instead of re-running the search
 const LIST_LAYOUT = 100;
 const GRID_LAYOUT = 200;
+let currentLayout = LIST_LAYOUT;
+
 
 
 //form the url used to call the Google Books api
@@ -33,7 +36,8 @@ function formSearchURL(searchTerms) {
 }
 
 // retrieves the search JSON and displays it as a list
-function search() {
+function search(numResults = 10, currentLayout = LIST_LAYOUT) {
+    currentNumResults = numResults;
     //creates the API url dynamically 
     const searchTerms = $("[id=searchInput]").val();
     const url = formSearchURL(searchTerms);
@@ -42,62 +46,103 @@ function search() {
         searchResultsJSON = data;
         console.log(data);
     }).then(function (response) {
-        showList(10);
+        showResults(currentNumResults,currentLayout,SEARCH_JSON);
     });
 }
 
 // retrieves the bookshelf JSON and displays it as a list
 function recommend(){
+    const maxRecomendResults = 5;
     const url = "https://www.googleapis.com/books/v1/users/108498590000483866475/bookshelves/1001/volumes?&key=AIzaSyAapv3F22n1UHUtHh5bnUKM3vHm62bfvXg"
     $.get(url, function (data) {
         recommendJSON = data;
         console.log(data);
     }).then(function (response) {
-        showRecommend();
+        showResults(maxRecomendResults,currentLayout,RECOMMEND_JSON);
+        $("[id=loadMoreBtn]").hide();
+        $("[id=backBtn]").show();
     });
 }
 
-function showList(numResults) {
- 
-    populateList(numResults,SEARCH_JSON);
-    $("[id=bookList]").show();
+//grab more the results from the JSON
+function loadMore(){
+    currentNumResults = (currentNumResults+resultsIncrement <= 40) ? currentNumResults+=resultsIncrement:currentNumResults;
+    search(currentNumResults,currentLayout);
+}
+
+//changes which layout the user is using to view results
+function changeLayout(layout){
+    if(layout===LIST_LAYOUT){
+        currentLayout = LIST_LAYOUT;
+        $("[id=bookList]").show();
+        $("[id=bookGrid]").hide();
+    }else if(layout===GRID_LAYOUT){
+        currentLayout = GRID_LAYOUT;
+        $("[id=bookList]").hide();
+        $("[id=bookGrid]").show();
+    }
+}
+
+function back(){
+    showResults(currentNumResults,currentLayout,SEARCH_JSON);
+    $("[id=backBtn]").hide();
+}
+
+function showResults(numResults,currentLayout,jsonToUse) {
+    populateList(numResults,jsonToUse);
+    populateGrid(numResults,jsonToUse);
+    changeLayout(currentLayout);
+    $("[id=layoutBar]").show();
+    $("[id=loadMoreBtn]").show();
 }
 
 // populate the list used for search results before displaying
 function populateList(numResults,jsonToUse) {
+
     let sourceJSON;
     if(jsonToUse===SEARCH_JSON){
         sourceJSON = searchResultsJSON;
-    }else if(jsonToUse===BOOKSHELF_JSON){
-        sourceJSON = bookshelfJSON;
+    }else if(jsonToUse===RECOMMEND_JSON){
+        sourceJSON = recommendJSON;
     }
 
+    $("[id=bookList]").empty();
+
+    for (let i = 0; i < numResults; i++) {
+        //create and populate list
+        let listTemplate = ``
+                        + `<div class="listBookRes" id="res${i}" onclick="showDetails(${i})">`
+                            + `<p>{{volumeInfo.title}}</p>`
+                        +`</div>`;
+        $("[id=bookList]").append(
+            Mustache.render(listTemplate,sourceJSON.items[i])
+        ); 
+    }   
+}
+
+function populateGrid(numResults,jsonToUse){
+    let sourceJSON;
+    if(jsonToUse===SEARCH_JSON){
+        sourceJSON = searchResultsJSON;
+    }else if(jsonToUse===RECOMMEND_JSON){
+        sourceJSON = recommendJSON;
+    }
+
+    $("[id=bookGrid]").empty();
 
     const itemsPerRow =3;
     const numGridRows = Math.ceil(numResults/itemsPerRow);
-    console.log('grid rows' + numGridRows);
-
+    //create the correct number of grid rows
     for(let i = 0; i < numGridRows; i++){
         let = gridRowTemplate = `<div class="bookGridRow" id="bookGridRow${i}"></div>`
         $("[id=bookGrid]").append(gridRowTemplate); 
     }
 
     for (let i = 0; i < numResults; i++) {
-    
-        let listTemplate = ``
-                        + `<div class="listBookRes" id="res${i}" onclick="showDetails(${i})">`
-                            + `<p>{{volumeInfo.title}}</p>`
-                        +`</div>`;
-
-        $("[id=bookList]").append(
-            Mustache.render(listTemplate,sourceJSON.items[i])
-        ); 
-
+        //create and populate grid results
         let resultRow = Math.floor(i/itemsPerRow);
-
-        console.log(resultRow);
         let gridResultTemplate = ``
-                            + `<div class="colWrap">`
+                            + `<div class="colWrap" onclick="showDetails(${i})">`
                                 + `<div class="bookGridCol">`
                                     + `<img id="gridImg${i}" src="#" alt="">`
                                     + `<p class="gridTitle">{{volumeInfo.title}}</p>`;
@@ -107,7 +152,7 @@ function populateList(numResults,jsonToUse) {
         $(`[id=bookGridRow${resultRow}]`).append(
             Mustache.render(gridResultTemplate,sourceJSON.items[i])
         ); 
-
+        //ensure there is an img in the JSON
         $(`[id=gridImg${i}]`).attr(
             "src",
             sourceJSON.items[i].volumeInfo.imageLinks
@@ -116,26 +161,15 @@ function populateList(numResults,jsonToUse) {
                 : "/images/no-image-icon.png"
         );
     }
-
-
-    // for(let i=0;i<itemsPerRow;i++){
-    //     $(`[id=gridimg${i}]`).attr(
-    //         "src",
-    //         sourceJSON.items[i].volumeInfo.imageLinks
-    //             ? sourceJSON.items[i].volumeInfo.imageLinks
-    //                 .smallThumbnail
-    //             : "/images/no-image-icon.png"
-    //     );
-    //     $(`[id=gridTitle${i}]`).html(
-    //         sourceJSON.items[i].volumeInfo.title ? sourceJSON.items[i].volumeInfo.title : ""
-    //     );
-    // }
-    
-    
 }
 
+$("[id=bookList]").hide();
+$("[id=bookGrid]").hide();
+$("[id=layoutBar]").hide();
+$("[id=loadMoreBtn]").hide();
+$("[id=backBtn]").hide();
 
 
-
+console.log(this);
 
 

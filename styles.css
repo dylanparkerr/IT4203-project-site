@@ -561,7 +561,7 @@ tr:nth-child(even) {
 .bookGridRow {
     /* background-color: teal; */
     width: 100%;
-    height: 280px;
+    height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -595,4 +595,24 @@ tr:nth-child(even) {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+#loadMoreBtn {
+    background-color: #231f20;
+    color: white;
+    width: 15%;
+    padding: 10px;
+    margin-left: 100%;
+    margin-right: 100%;
+    border-radius: 10px;
+    border: none;
+    margin: auto;
+    margin-top: 30px;
+    display: block;
+}
+#loadMoreBtn:hover {
+    background-color: #4e4e4e;
+}
+#loadMoreBtn:active {
+    background-color: #ffc629;
 }
