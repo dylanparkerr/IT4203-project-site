@@ -47,11 +47,12 @@ function search(numResults = 10, currentLayout = LIST_LAYOUT) {
         console.log(data);
     }).then(function (response) {
         showResults(currentNumResults,currentLayout,SEARCH_JSON);
+        $("[id=backBtn]").hide();
     });
 }
 
 // retrieves the bookshelf JSON and displays it as a list
-function recommend(){
+function recommendShelf(){
     const maxRecomendResults = 5;
     const url = "https://www.googleapis.com/books/v1/users/108498590000483866475/bookshelves/1001/volumes?&key=AIzaSyAapv3F22n1UHUtHh5bnUKM3vHm62bfvXg"
     $.get(url, function (data) {
@@ -115,7 +116,7 @@ function populateList(numResults,jsonToUse) {
     for (let i = 0; i < numResults; i++) {
         //create and populate list
         let listTemplate = ``
-                        + `<div class="listBookRes" id="res${i}" onclick="showDetails(${i})">`
+                        + `<div class="listBookRes" id="res${i}" onclick="showDetails(${i},'${jsonToUse}')">`
                             + `<p>{{volumeInfo.title}}</p>`
                         +`</div>`;
         $("[id=bookList]").append(
@@ -146,7 +147,7 @@ function populateGrid(numResults,jsonToUse){
         //create and populate grid results
         let resultRow = Math.floor(i/itemsPerRow);
         let gridResultTemplate = ``
-                            + `<div class="colWrap" onclick="showDetails(${i})">`
+                            + `<div class="colWrap" onclick="showDetails(${i},'${jsonToUse}')">`
                                 + `<div class="bookGridCol">`
                                     + `<img id="gridImg${i}" src="#" alt="">`
                                     + `<p class="gridTitle">{{volumeInfo.title}}</p>`;
@@ -167,13 +168,99 @@ function populateGrid(numResults,jsonToUse){
     }
 }
 
+function showDetails(i,jsonToUse){
+    console.log(jsonToUse);
+    let sourceJSON;
+    if(jsonToUse===SEARCH_JSON){
+        sourceJSON = searchResultsJSON;
+    }else if(jsonToUse===RECOMMEND_JSON){
+        sourceJSON = recommendJSON;
+    }
+
+    document.getElementById("detailsModal").style.display = "block";
+
+    // $(`[id=detailsTitle]`).html(
+    //     sourceJSON.items[i].volumeInfo.title ? sourceJSON.items[i].volumeInfo.title : ""
+    // );
+    // $(`[id=detailsSubTitle]`).html(
+    //     sourceJSON.items[i].volumeInfo.subtitle ? sourceJSON.items[i].volumeInfo.subtitle : ""
+    // );
+
+    let detailsTemplate = ``
+                        + `<div id="detailsLeftWrap">`
+                            +`<img id="detailsImg" src="#" alt="">`
+                            +`<h1 id="detailsTitle" class="bookTitle">{{volumeInfo.title}}</h1>`
+                            +`<br>`
+                            +`<h2 id="detailsSubTitle" class="bookSubTitle">{{volumeInfo.subtitle}}</h2>`
+                        +`</div>`
+
+                        +`<table id="detailsTable">`
+                            +`<tr>`
+                                +`<td>Authors</td>`
+                                +`<td>{{volumeInfo.authors}}</td>`
+                            +`</tr>`
+                            +`<tr>`
+                                +`<td>Year</td>`
+                                +`<td>{{volumeInfo.publishedDate}}</td>`
+                            +`</tr>`
+                            +`<tr>`
+                                +`<td>ISBN 10</td>`
+                                +`<td>{{volumeInfo.industryIdentifiers.1.identifier}}</td>`
+                            +`</tr>`
+                            +`<tr>`
+                                +`<td>ISBN 13</td>`
+                                +`<td>{{volumeInfo.industryIdentifiers.0.identifier}}</td>`
+                            +`</tr>`
+                            +`<tr>`
+                                +`<td>Language</td>`
+                                +`<td>{{volumeInfo.language}}</td>`
+                            +`</tr>`
+                            +`<tr>`
+                                +`<td>Pages</td>`
+                                +`<td>{{volumeInfo.pageCount}}</td>`
+                            +`</tr>`
+                            +`<tr>`
+                                +`<td>Publisher</td>`
+                                +`<td>{{volumeInfo.publisher}}</td>`
+                            +`</tr>`
+                            +`<tr>`
+                                +`<td>Category</td>`
+                                +`<td>{{volumeInfo.categories}}</td>`
+                            +`</tr>`
+                            +`<tr>`
+                                +`<td>Maturity Rating</td>`
+                                +`<td>{{volumeInfo.maturityRating}}</td>`
+                            +`</tr>`
+                        +`</table>`
+
+                        +`<div style="clear: both;"></div>`;
+                    
+
+    $("[id=modal-details]").append(
+            Mustache.render(detailsTemplate,sourceJSON.items[i])
+        ); 
+
+
+    $("[id=detailsImg]").attr(
+        "src",
+        sourceJSON.items[i].volumeInfo.imageLinks
+            ? sourceJSON.items[i].volumeInfo.imageLinks
+                .smallThumbnail
+            : "/images/no-image-icon.png"
+    );
+}
+function closeDetails(){
+    document.getElementById("detailsModal").style.display = "none";
+    $("[id=modal-details]").empty();
+}
+
+
+
 $("[id=bookList]").hide();
 $("[id=bookGrid]").hide();
 $("[id=layoutBar]").hide();
 $("[id=loadMoreBtn]").hide();
 $("[id=backBtn]").hide();
 
-
-console.log(this);
 
 

@@ -50,7 +50,7 @@
                     </div>
 
                     <!-- TODO fix the bookshelf naming -->
-                    <button id="recommendBtn" onclick="recommend()">
+                    <button id="recommendBtn" onclick="recommendShelf()">
                         Editor's Recommendation
                     </button>
                     <div class="floatclear"></div>
@@ -98,6 +98,62 @@
     
                     <button id="loadMoreBtn" onclick="loadMore()">Load More Results</button>
                     
+                </div>
+
+                <div id="detailsModal" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                      <span class="close" onclick="closeDetails()">&times;</span>
+                        <div id="modal-details">
+                            <!-- <div id="detailsLeftWrap"></div>
+                                <img id="detailsImg" src="#" alt="">
+                                <h1 id="detailsTitle" class="bookTitle"></h1>
+                                <br>
+                                <h2 id="detailsSubTitle" class="bookSubTitle"></h2>
+                            </div>
+
+                            <table id="detailsTable">
+                                <tr>
+                                    <td>Authors</td>
+                                    <td id="detailsAuth"></td>
+                                </tr>
+                                <tr>
+                                    <td>Year</td>
+                                    <td id="detailsYear"></td>
+                                </tr>
+                                <tr>
+                                    <td>ISBN 10</td>
+                                    <td id="detailsISBN10"></td>
+                                </tr>
+                                <tr>
+                                    <td>ISBN 13</td>
+                                    <td id="detailsISBN13"></td>
+                                </tr>
+                                <tr>
+                                    <td>Language</td>
+                                    <td id="detailsLang"></td>
+                                </tr>
+                                <tr>
+                                    <td>Pages</td>
+                                    <td id="detailsPages"></td>
+                                </tr>
+                                <tr>
+                                    <td>Publisher</td>
+                                    <td id="detailsPub"></td>
+                                </tr>
+                                <tr>
+                                    <td>Category</td>
+                                    <td id="detailsCat" ></td>
+                                </tr>
+                                <tr>
+                                    <td>Maturity Rating</td>
+                                    <td id="detailsMaturity" ></td>
+                                </tr>
+                            </table>
+
+                            <div style="clear: both;"></div> -->
+                        </div>
+                    </div>
                 </div>
 
 
