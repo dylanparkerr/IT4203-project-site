@@ -74,10 +74,14 @@ function loadMore(){
 function changeLayout(layout){
     if(layout===LIST_LAYOUT){
         currentLayout = LIST_LAYOUT;
+        $("[id=listOption]").addClass("activeLayout");
+        $("[id=gridOption]").removeClass("activeLayout");
         $("[id=bookList]").show();
         $("[id=bookGrid]").hide();
     }else if(layout===GRID_LAYOUT){
         currentLayout = GRID_LAYOUT;
+        $("[id=listOption]").removeClass("activeLayout");
+        $("[id=gridOption]").addClass("activeLayout");
         $("[id=bookList]").hide();
         $("[id=bookGrid]").show();
     }

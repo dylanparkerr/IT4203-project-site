@@ -616,3 +616,7 @@ tr:nth-child(even) {
 #loadMoreBtn:active {
     background-color: #ffc629;
 }
+
+.activeLayout {
+    text-decoration: underline;
+}
