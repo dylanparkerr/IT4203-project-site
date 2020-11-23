@@ -1,5 +1,6 @@
 // used to set the increment of results per load
 const resultsIncrement = 10;
+//keeps track of the number of results currently on the page
 let currentNumResults = resultsIncrement;
 // magic strings to let populateDetails() know what JSON to use
 const SEARCH_JSON = 'search';
@@ -8,10 +9,10 @@ const RECOMMEND_JSON = 'recommend';
 let searchResultsJSON;
 // store the JSON returned from the bookshelf to keep seperate from search
 let recommendJSON;
-// using a current page lets the user click the back button to return
-// to the same page they were on instead of re-running the search
+// Constants for layout options, using numbers for pass by value as opposed to ref
 const LIST_LAYOUT = 100;
 const GRID_LAYOUT = 200;
+//keeps track of the current layout the page is displaying, set to list by default
 let currentLayout = LIST_LAYOUT;
 
 
@@ -44,7 +45,6 @@ function search(numResults = 10, currentLayout = LIST_LAYOUT) {
 
     $.get(url, function (data) {
         searchResultsJSON = data;
-        console.log(data);
     }).then(function (response) {
         showResults(currentNumResults,currentLayout,SEARCH_JSON);
         $("[id=backBtn]").hide();
@@ -57,7 +57,6 @@ function recommendShelf(){
     const url = "https://www.googleapis.com/books/v1/users/108498590000483866475/bookshelves/1001/volumes?&key=AIzaSyAapv3F22n1UHUtHh5bnUKM3vHm62bfvXg"
     $.get(url, function (data) {
         recommendJSON = data;
-        console.log(data);
     }).then(function (response) {
         showResults(maxRecomendResults,currentLayout,RECOMMEND_JSON);
         $("[id=loadMoreBtn]").hide();
@@ -88,11 +87,13 @@ function changeLayout(layout){
     }
 }
 
+//takes the user back to search results from viewing the recommendation bookshelf
 function back(){
     showResults(currentNumResults,currentLayout,SEARCH_JSON);
     $("[id=backBtn]").hide();
 }
 
+//populates the layout views and displays the current layout
 function showResults(numResults,currentLayout,jsonToUse) {
     populateList(numResults,jsonToUse);
     populateGrid(numResults,jsonToUse);
@@ -103,7 +104,6 @@ function showResults(numResults,currentLayout,jsonToUse) {
 
 // populate the list used for search results before displaying
 function populateList(numResults,jsonToUse) {
-
     let sourceJSON;
     if(jsonToUse===SEARCH_JSON){
         sourceJSON = searchResultsJSON;
@@ -113,8 +113,9 @@ function populateList(numResults,jsonToUse) {
 
     $("[id=bookList]").empty();
 
+    //create and populate list
     for (let i = 0; i < numResults; i++) {
-        //create and populate list
+        //mustache template
         let listTemplate = ``
                         + `<div class="listBookRes" id="res${i}" onclick="showDetails(${i},'${jsonToUse}')">`
                             + `<p>{{volumeInfo.title}}</p>`
@@ -125,6 +126,7 @@ function populateList(numResults,jsonToUse) {
     }   
 }
 
+// populate the grid view for search results
 function populateGrid(numResults,jsonToUse){
     let sourceJSON;
     if(jsonToUse===SEARCH_JSON){
@@ -143,9 +145,11 @@ function populateGrid(numResults,jsonToUse){
         $("[id=bookGrid]").append(gridRowTemplate); 
     }
 
+    //create and populate grid results
     for (let i = 0; i < numResults; i++) {
-        //create and populate grid results
+        //find what row a given index should be located in
         let resultRow = Math.floor(i/itemsPerRow);
+        //mustache template
         let gridResultTemplate = ``
                             + `<div class="colWrap" onclick="showDetails(${i},'${jsonToUse}')">`
                                 + `<div class="bookGridCol">`
@@ -168,8 +172,8 @@ function populateGrid(numResults,jsonToUse){
     }
 }
 
+//create and populate the detailed information view
 function showDetails(i,jsonToUse){
-    console.log(jsonToUse);
     let sourceJSON;
     if(jsonToUse===SEARCH_JSON){
         sourceJSON = searchResultsJSON;
@@ -177,8 +181,10 @@ function showDetails(i,jsonToUse){
         sourceJSON = recommendJSON;
     }
 
+    //reveal the modal window
     document.getElementById("detailsModal").style.display = "block";
 
+    //mustace template for detailed view
     let detailsTemplate = ``
                         + `<div id="detailsLeftWrap">`
                             +`<img id="detailsImg" src="#" alt="">`
@@ -228,11 +234,11 @@ function showDetails(i,jsonToUse){
 
                         +`<div style="clear: both;"></div>`;
                     
-
     $("[id=modal-details]").append(
             Mustache.render(detailsTemplate,sourceJSON.items[i])
         ); 
 
+    //ensure there is a image given in the JSON object
     $("[id=detailsImg]").attr(
         "src",
         sourceJSON.items[i].volumeInfo.imageLinks
@@ -242,12 +248,13 @@ function showDetails(i,jsonToUse){
     );
 }
 
+//hide the detailed view
 function closeDetails(){
     document.getElementById("detailsModal").style.display = "none";
     $("[id=modal-details]").empty();
 }
 
-
+//initially hide elements on the screen
 $("[id=bookList]").hide();
 $("[id=bookGrid]").hide();
 $("[id=layoutBar]").hide();
