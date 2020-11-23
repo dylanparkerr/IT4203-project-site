@@ -179,13 +179,6 @@ function showDetails(i,jsonToUse){
 
     document.getElementById("detailsModal").style.display = "block";
 
-    // $(`[id=detailsTitle]`).html(
-    //     sourceJSON.items[i].volumeInfo.title ? sourceJSON.items[i].volumeInfo.title : ""
-    // );
-    // $(`[id=detailsSubTitle]`).html(
-    //     sourceJSON.items[i].volumeInfo.subtitle ? sourceJSON.items[i].volumeInfo.subtitle : ""
-    // );
-
     let detailsTemplate = ``
                         + `<div id="detailsLeftWrap">`
                             +`<img id="detailsImg" src="#" alt="">`
@@ -240,7 +233,6 @@ function showDetails(i,jsonToUse){
             Mustache.render(detailsTemplate,sourceJSON.items[i])
         ); 
 
-
     $("[id=detailsImg]").attr(
         "src",
         sourceJSON.items[i].volumeInfo.imageLinks
@@ -249,11 +241,11 @@ function showDetails(i,jsonToUse){
             : "/images/no-image-icon.png"
     );
 }
+
 function closeDetails(){
     document.getElementById("detailsModal").style.display = "none";
     $("[id=modal-details]").empty();
 }
-
 
 
 $("[id=bookList]").hide();

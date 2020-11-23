@@ -29,9 +29,7 @@
                 <h2 class="section-title">User Interface Refinement</h2>
                 <br />
                 <p class="section-details">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Illum repellendus, eos explicabo fugiat consequatur quos
-                    porro quas in molestias beatae.
+                    This milestone focuses on improving the user interface. This page uses Mustache.js to create html templates that are dynamically populated with variables, making it easy to separate the view and model logic. Users can choose whether to view search results in a list or grid format. This page also uses a "load more" implementation as an alternative to pagination. The user can also choose to see a bookshelf of "Editor's recommendations" at any time, and switch back to their search results without losing their place. 
                 </p>
 
                 <div id="search">
@@ -51,7 +49,7 @@
 
                     <!-- TODO fix the bookshelf naming -->
                     <button id="recommendBtn" onclick="recommendShelf()">
-                        Editor's Recommendation
+                        Editor's Recommendations
                     </button>
                     <div class="floatclear"></div>
                 </div>
@@ -105,53 +103,7 @@
                     <div class="modal-content">
                       <span class="close" onclick="closeDetails()">&times;</span>
                         <div id="modal-details">
-                            <!-- <div id="detailsLeftWrap"></div>
-                                <img id="detailsImg" src="#" alt="">
-                                <h1 id="detailsTitle" class="bookTitle"></h1>
-                                <br>
-                                <h2 id="detailsSubTitle" class="bookSubTitle"></h2>
-                            </div>
-
-                            <table id="detailsTable">
-                                <tr>
-                                    <td>Authors</td>
-                                    <td id="detailsAuth"></td>
-                                </tr>
-                                <tr>
-                                    <td>Year</td>
-                                    <td id="detailsYear"></td>
-                                </tr>
-                                <tr>
-                                    <td>ISBN 10</td>
-                                    <td id="detailsISBN10"></td>
-                                </tr>
-                                <tr>
-                                    <td>ISBN 13</td>
-                                    <td id="detailsISBN13"></td>
-                                </tr>
-                                <tr>
-                                    <td>Language</td>
-                                    <td id="detailsLang"></td>
-                                </tr>
-                                <tr>
-                                    <td>Pages</td>
-                                    <td id="detailsPages"></td>
-                                </tr>
-                                <tr>
-                                    <td>Publisher</td>
-                                    <td id="detailsPub"></td>
-                                </tr>
-                                <tr>
-                                    <td>Category</td>
-                                    <td id="detailsCat" ></td>
-                                </tr>
-                                <tr>
-                                    <td>Maturity Rating</td>
-                                    <td id="detailsMaturity" ></td>
-                                </tr>
-                            </table>
-
-                            <div style="clear: both;"></div> -->
+                            <!-- Img title and table get populated here -->
                         </div>
                     </div>
                 </div>
