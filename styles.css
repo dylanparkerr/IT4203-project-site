@@ -57,7 +57,8 @@ nav a:active {
 .milestone-1-content,
 .milestone-2-content,
 .milestone-3-content,
-.milestone-4-content {
+.milestone-4-content,
+.termproject-content {
     padding: 100px 20px 20px 20px;
     width: 100%-20px; /*fixes issue where the this container is wider than everything else*/
     height: 100%;
