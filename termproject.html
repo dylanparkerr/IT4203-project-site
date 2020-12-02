@@ -30,10 +30,39 @@
                 <h2 class="section-title">Movies DB</h2>
                 <br />
                 <p class="section-details">
+                    This product uses the TMDb API but is not endorsed or certified by TMDb.
+                </p>
+                <br>
+                <img src="/images/longlogo.svg" alt="">
+                <br>
+                <br>
+                <br>
+                <p class="section-details">
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                     Illum repellendus, eos explicabo fugiat consequatur quos
                     porro quas in molestias beatae.
                 </p>
+
+                <div id="search">
+                    <div id="search-header">
+                        <h2>Search The Movie DB</h2>
+                    </div>
+                    <div id="search-body">
+                        <input
+                            id="searchInput"
+                            type="search"
+                            placeholder="Ex: Inception"
+                        />
+                        <button id="searchBtn" onclick="search()">
+                            Search
+                        </button>
+                    </div>
+                    <button id="bookshelfBtn" onclick="popular()">
+                        See What's Popular
+                    </button>
+                    <div class="floatclear"></div>
+                </div>
+
             </div>
         </div>
     </body>

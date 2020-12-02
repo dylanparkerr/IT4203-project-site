@@ -329,7 +329,8 @@ tr:nth-child(even) {
     margin-top: 50px;
     float: left;
 }
-#search-header h2 {
+#search-header h2,
+.divider-text {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
     font-weight: 500;
@@ -654,3 +655,5 @@ tr:nth-child(even) {
     margin-top: 40px;
     margin-bottom: 40px;
 }
+
+/*********************************Term Project**************************/
