@@ -377,7 +377,8 @@ tr:nth-child(even) {
 }
 
 #bookshelfBtn,
-#recommendBtn {
+#recommendBtn,
+#popularBtn {
     float: right;
     background-color: #231f20;
     color: white;

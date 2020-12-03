@@ -22,10 +22,19 @@ function formSearchURL(searchTerms) {
     return url;
 }
 
-function firstSearch(){
-    search();
+function firstSearch(button) {
+    if(button==="search"){
+        if ($("[id=searchInput]").val()===""){
+            return;
+        }
+        search(); 
+    }
+    else if(button==="popular"){
+        popular();
+    }
     $("[id=movieList]").show();
     $("[id=searchBtn]").attr("onclick","search()");
+    $("[id=popularBtn]").attr("onclick","popular()");
 }
 
 function search() {
