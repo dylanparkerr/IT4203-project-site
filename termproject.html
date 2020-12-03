@@ -63,6 +63,56 @@
                     <div class="floatclear"></div>
                 </div>
 
+                <div id="layoutBar">
+                    <div id="layoutRow">
+                        <p class="layoutOption activeLayout" id="listOption" onclick="changeLayout(LIST_LAYOUT)">List</p>
+                        <p class="layoutOption" id="gridOption" onclick="changeLayout(GRID_LAYOUT)">Grid</p>
+                    </div>
+                </div>
+
+                <div id="searchResult">
+                    <div id="movieList">
+                        <!-- this gets populated by results that look like this, where '#' is the index of the loop -->
+                        <!-- <div class="movieBookRes" id="res#" onclick="showDetails(#)">
+                            <p></p>
+                        </div> -->
+                    </div>
+
+                    <div id="movieGrid">
+                        <!-- This gets populated with rows that look like this -->
+                        <!-- <div class="bookGridRow" id="bookGridRow#">
+                            <div class="colWrap">
+                                <div class="bookGridCol" onclick="showDetails(#)">
+                                    <img id="gridImg0" src="#" alt="">
+                                    <p class="gridTitle"></p>
+                                </div>
+                            </div>
+                            <div class="colWrap">
+                                <div class="bookGridCol">
+                                    <img id="gridimg1" src="#" alt="">
+                                    <p class="gridTitle"></p>
+                                </div>
+                            </div>
+                            <div class="colWrap">
+                                <div class="bookGridCol">
+                                    <img id="gridimg2" src="#" alt="">
+                                    <p class="gridTitle""></p>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+    
+                </div>
+
+                <div id="detailsModal" class="modal">
+                    <div class="modal-content">
+                      <span class="close" onclick="closeDetails()">&times;</span>
+                        <div id="modal-details">
+                            <!-- Img title and table get populated here -->
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </body>

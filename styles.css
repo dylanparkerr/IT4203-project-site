@@ -569,7 +569,7 @@ tr:nth-child(even) {
 }
 .colWrap {
     height: 280px;
-    width: 32%;
+    width: 31%;
     align-items: center;
     display: flex;
     border: 1px solid #e5e5e5;
@@ -657,3 +657,41 @@ tr:nth-child(even) {
 }
 
 /*********************************Term Project**************************/
+
+#movieList,
+#movieGrid {
+    /* height: 800px; */
+    height: 100%;
+    width: 100%;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+}
+
+.movieListRes {
+    text-align: center;
+}
+.movieListRes:nth-child(even) {
+    background-color: #e5e5e5;
+}
+.movieListRes p {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 5px;
+}
+.movieListRes p:hover {
+    text-decoration: underline;
+}
+
+.movieGridRow {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.movieGridCol {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
