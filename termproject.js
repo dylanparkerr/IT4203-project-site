@@ -24,10 +24,9 @@ function formSearchURL(searchTerms) {
 
 function firstSearch(button) {
     if(button==="search"){
-        if ($("[id=searchInput]").val()===""){
+        if(search()==-1){
             return;
         }
-        search(); 
     }
     else if(button==="popular"){
         popular();
@@ -38,6 +37,9 @@ function firstSearch(button) {
 }
 
 function search() {
+    if ($("[id=searchInput]").val()===""){
+        return -1;
+    }
     const searchTerms = $("[id=searchInput]").val();
     const url = formSearchURL(searchTerms);
 
