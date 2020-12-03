@@ -1,4 +1,6 @@
 let resultsJSON;
+const LIST_LAYOUT = "list";
+const GRID_LAYOUT = "grid"
 
 function formSearchURL(searchTerms) {
     const URL_FRONT = "https://api.themoviedb.org/3/search/movie?api_key=29c078526c3def639d7446d64fd1bee7&query=";
@@ -18,6 +20,12 @@ function formSearchURL(searchTerms) {
     let url =`${URL_FRONT}${queryTerms}${URL_PAGE}${pageNumber}${URL_END}`;
 
     return url;
+}
+
+function firstSearch(){
+    search();
+    $("[id=movieList]").show();
+    $("[id=searchBtn]").attr("onclick","search()");
 }
 
 function search() {
@@ -46,6 +54,8 @@ function popular(){
     }).then(function (response) {
         //hide details so searching after looking at bookshelf removes old details
         console.log(resultsJSON);
+        populateList();
+        populateGrid();
     });
 }
 
@@ -116,6 +126,25 @@ function populateGrid(){
         );
     }
 }
-$.get("https://api.themoviedb.org/3/configuration?api_key=29c078526c3def639d7446d64fd1bee7", function (data) {
-    console.log(data);
-})
+
+function changeLayout(layout){
+    if(layout===LIST_LAYOUT){
+        currentLayout = LIST_LAYOUT;
+        $("[id=listOption]").addClass("activeLayout");
+        $("[id=gridOption]").removeClass("activeLayout");
+        $("[id=movieList]").show();
+        $("[id=movieGrid]").hide();
+    }else if(layout===GRID_LAYOUT){
+        currentLayout = GRID_LAYOUT;
+        $("[id=listOption]").removeClass("activeLayout");
+        $("[id=gridOption]").addClass("activeLayout");
+        $("[id=movieList]").hide();
+        $("[id=movieGrid]").show();
+    }
+}
+
+$("[id=movieList]").hide();
+$("[id=movieGrid]").hide();
+// $.get("https://api.themoviedb.org/3/configuration?api_key=29c078526c3def639d7446d64fd1bee7", function (data) {
+//     console.log(data);
+// })
