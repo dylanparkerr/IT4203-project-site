@@ -72,10 +72,9 @@
 
                 <div id="navBar">
                     <div id="pageNumberRow">
-                        <!-- <p class="pageNumber" onclick="showList(0)">1</p>
-                        <p class="pageNumber" onclick="showList(1)">2</p>
-                        <p class="pageNumber" onclick="showList(2)">3</p>
-                        <p class="pageNumber" onclick="showList(3)">4</p> -->
+                        <!-- <p class="pageNumber" onclick="search(page#)">1</p> 
+                        or <p class="pageNumber" onclick="search(page#, true)">1</p>
+                        if the current search method is the popular button-->
                     </div>
                 </div>
 
@@ -114,7 +113,7 @@
                 </div>
 
                 <div id="detailsModal" class="modal">
-                    <div class="modal-content">
+                    <div class="modal-content" id="movie-content">
                       <span class="close" onclick="closeDetails()">&times;</span>
                         <div id="modal-details">
                             <!-- Img title and table get populated here -->

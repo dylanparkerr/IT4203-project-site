@@ -632,7 +632,7 @@ tr:nth-child(even) {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
+    margin: 10% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 50%;
@@ -695,4 +695,10 @@ tr:nth-child(even) {
     display: inline-block;
     width: 100%;
     text-align: center;
+}
+
+#movie-content {
+    height: 550px;
+    margin: 5% auto;
+    width: 60%;
 }

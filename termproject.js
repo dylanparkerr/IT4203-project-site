@@ -24,20 +24,6 @@ function formSearchURL(searchTerms, pageNumber) {
     return url;
 }
 
-function firstSearch(button) {
-    if(button==="search"){
-        if(search(1,SEARCH_METHOD)==-1){
-            return;
-        }
-    }
-    else if(button==="popular"){
-        search(1,POPULAR_METHOD);
-    }
-    $("[id=movieList]").show();
-    $("[id=searchBtn]").attr("onclick","search(1,SEARCH_METHOD)");
-    $("[id=popularBtn]").attr("onclick","search(1,POPULAR_METHOD)");
-}
-
 function search(pageNumber,searchMethod = SEARCH_METHOD) {
     let url;
     if (searchMethod === POPULAR_METHOD){
@@ -66,20 +52,19 @@ function search(pageNumber,searchMethod = SEARCH_METHOD) {
     });
 }
 
-
-// function popular(pageNumber){
-//     const url = `https://api.themoviedb.org/3/movie/popular?api_key=29c078526c3def639d7446d64fd1bee7&language=en-US&page=${pageNumber}`;
-
-//     $.get(url, function (data) {
-//         resultsJSON = data;
-//     }).then(function (response) {
-//         //hide details so searching after looking at bookshelf removes old details
-//         console.log(resultsJSON);
-//         populateList();
-//         populateGrid();
-//         populateNumberRow(resultsJSON.page, resultsJSON.total_pages)
-//     });
-// }
+function firstSearch(button) {
+    if(button==="search"){
+        if(search(1,SEARCH_METHOD)==-1){
+            return;
+        }
+    }
+    else if(button==="popular"){
+        search(1,POPULAR_METHOD);
+    }
+    $("[id=movieList]").show();
+    $("[id=searchBtn]").attr("onclick","search(1,SEARCH_METHOD)");
+    $("[id=popularBtn]").attr("onclick","search(1,POPULAR_METHOD)");
+}
 
 function populateList() {
 
@@ -96,7 +81,7 @@ function populateList() {
             `<div class="movieListRes" id="listRes${i}" ></div>`
         );
         $(`[id=listRes${i}]`).append(
-            `<p id="title${i}"onclick="showDetails()"></p>`
+            `<p id="title${i}"onclick="showDetails(${i})"></p>`
         );
 
         //populate the newly created elements
@@ -128,7 +113,7 @@ function populateGrid(){
         let resultRow = Math.floor(i/itemsPerRow);
         
         $(`[id=movieGridRow${resultRow}]`).append(
-            `<div class="colWrap" id="colWrap${i}" onclick="showDetails()"></div>`
+            `<div class="colWrap" id="colWrap${i}" onclick="showDetails(${i})"></div>`
         ); 
         $(`[id=colWrap${i}]`).append(
             `<div class="movieGridCol" id="gridRes${i}"></div>`
@@ -164,7 +149,6 @@ function populateNumberRow(currentPage, lastPage) {
             pageRange.push(i);
         }
     }
-    console.log(pageRange);
 
     for (let i of pageRange) {
         if (temp) {
@@ -177,7 +161,6 @@ function populateNumberRow(currentPage, lastPage) {
         formattedPageRange.push(i);
         temp = i;
     }
-    console.log(formattedPageRange);
 
     for(let page of formattedPageRange){
         if (page == currentPage) {
@@ -206,6 +189,16 @@ function changeLayout(layout){
         $("[id=movieList]").hide();
         $("[id=movieGrid]").show();
     }
+}
+
+function showDetails(index){
+    $("[id=detailsModal]").css("display","block");
+}
+
+//hide the detailed view
+function closeDetails(){
+    document.getElementById("detailsModal").style.display = "none";
+    $("[id=modal-details]").empty();
 }
 
 $("[id=movieList]").hide();
