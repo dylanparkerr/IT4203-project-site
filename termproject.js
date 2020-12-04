@@ -1,12 +1,14 @@
 let resultsJSON;
+const SEARCH_METHOD = "search";
+const POPULAR_METHOD = "popular"
 const LIST_LAYOUT = "list";
-const GRID_LAYOUT = "grid"
+const GRID_LAYOUT = "grid";
+let currentMethod = SEARCH_METHOD;
 
 function formSearchURL(searchTerms, pageNumber) {
     const URL_FRONT = "https://api.themoviedb.org/3/search/movie?api_key=29c078526c3def639d7446d64fd1bee7&query=";
     let queryTerms = "";
     const URL_PAGE = "&page=";
-    // let pageNumber = 1;
     const URL_END = "&include_adult=false";
     const terms = searchTerms.split(" ");
 
@@ -29,21 +31,30 @@ function firstSearch(button) {
         }
     }
     else if(button==="popular"){
-        popular();
+        search(1,true);
     }
     $("[id=movieList]").show();
-    $("[id=searchBtn]").attr("onclick","search()");
-    $("[id=popularBtn]").attr("onclick","popular()");
+    $("[id=searchBtn]").attr("onclick","search(1)");
+    $("[id=popularBtn]").attr("onclick","search(1,true)");
 }
 
-function search(pageNumber) {
-    if ($("[id=searchInput]").val()===""){
-        return -1;
+function search(pageNumber,popularBtn = false) {
+    let url;
+    if (popularBtn === true){
+        url = `https://api.themoviedb.org/3/movie/popular?api_key=29c078526c3def639d7446d64fd1bee7&language=en-US&page=${pageNumber}`;
+        currentMethod = POPULAR_METHOD;
     }
-    const searchTerms = $("[id=searchInput]").val();
-    const url = formSearchURL(searchTerms,pageNumber);
-
+    else if (popularBtn === false){
+        if ($("[id=searchInput]").val()===""){
+            return -1;
+        }
+        const searchTerms = $("[id=searchInput]").val();
+        url = formSearchURL(searchTerms,pageNumber);
+        currentMethod = SEARCH_METHOD;
+    }
     console.log(url);
+    console.log(currentMethod);
+
     $.get(url, function (data) {
         resultsJSON = data;
     }).then(function (response) {
@@ -51,26 +62,24 @@ function search(pageNumber) {
         console.log(resultsJSON);
         populateList();
         populateGrid();
-        console.log(resultsJSON.page, resultsJSON.total_pages);
         populateNumberRow(resultsJSON.page, resultsJSON.total_pages)
     });
 }
 
 
-function popular(){
-    let pageNumber = 1;
-    const url = `https://api.themoviedb.org/3/movie/popular?api_key=29c078526c3def639d7446d64fd1bee7&language=en-US&page=${pageNumber}`;
+// function popular(pageNumber){
+//     const url = `https://api.themoviedb.org/3/movie/popular?api_key=29c078526c3def639d7446d64fd1bee7&language=en-US&page=${pageNumber}`;
 
-    console.log(url);
-    $.get(url, function (data) {
-        resultsJSON = data;
-    }).then(function (response) {
-        //hide details so searching after looking at bookshelf removes old details
-        console.log(resultsJSON);
-        populateList();
-        populateGrid();
-    });
-}
+//     $.get(url, function (data) {
+//         resultsJSON = data;
+//     }).then(function (response) {
+//         //hide details so searching after looking at bookshelf removes old details
+//         console.log(resultsJSON);
+//         populateList();
+//         populateGrid();
+//         populateNumberRow(resultsJSON.page, resultsJSON.total_pages)
+//     });
+// }
 
 function populateList() {
 
@@ -143,7 +152,7 @@ function populateGrid(){
 function populateNumberRow(currentPage, lastPage) {
     $("[id=pageNumberRow]").empty();
 
-    const delta = 1;
+    const delta = 2;
     let leftEnd = currentPage - delta;
     let rightEnd = currentPage + delta + 1;
     let pageRange = [];
@@ -170,16 +179,14 @@ function populateNumberRow(currentPage, lastPage) {
     }
     console.log(formattedPageRange);
 
-    for(let i of formattedPageRange){
-        if (i == currentPage) {
+    for(let page of formattedPageRange){
+        if (page == currentPage) {
             $("[id=pageNumberRow]").append(
-                `<p class="pageNumber activePage" onclick="search(${i})">${
-                    i
-                }</p>`
+                `<p class="pageNumber activePage" onclick="search(${page},${currentMethod===SEARCH_METHOD?false:true})">${page}</p>`
             );
         } else {
             $("[id=pageNumberRow]").append(
-                `<p class="pageNumber" onclick="search(${i})">${i}</p>`
+                `<p class="pageNumber" onclick="search(${page},${currentMethod===SEARCH_METHOD?false:true})">${page}</p>`
             );
         }
     }
@@ -203,6 +210,3 @@ function changeLayout(layout){
 
 $("[id=movieList]").hide();
 $("[id=movieGrid]").hide();
-// $.get("https://api.themoviedb.org/3/configuration?api_key=29c078526c3def639d7446d64fd1bee7", function (data) {
-//     console.log(data);
-// })
