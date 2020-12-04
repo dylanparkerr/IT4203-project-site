@@ -2,11 +2,11 @@ let resultsJSON;
 const LIST_LAYOUT = "list";
 const GRID_LAYOUT = "grid"
 
-function formSearchURL(searchTerms) {
+function formSearchURL(searchTerms, pageNumber) {
     const URL_FRONT = "https://api.themoviedb.org/3/search/movie?api_key=29c078526c3def639d7446d64fd1bee7&query=";
     let queryTerms = "";
     const URL_PAGE = "&page=";
-    let pageNumber = 1;
+    // let pageNumber = 1;
     const URL_END = "&include_adult=false";
     const terms = searchTerms.split(" ");
 
@@ -24,7 +24,7 @@ function formSearchURL(searchTerms) {
 
 function firstSearch(button) {
     if(button==="search"){
-        if(search()==-1){
+        if(search(1)==-1){
             return;
         }
     }
@@ -36,12 +36,12 @@ function firstSearch(button) {
     $("[id=popularBtn]").attr("onclick","popular()");
 }
 
-function search() {
+function search(pageNumber) {
     if ($("[id=searchInput]").val()===""){
         return -1;
     }
     const searchTerms = $("[id=searchInput]").val();
-    const url = formSearchURL(searchTerms);
+    const url = formSearchURL(searchTerms,pageNumber);
 
     console.log(url);
     $.get(url, function (data) {
@@ -51,6 +51,8 @@ function search() {
         console.log(resultsJSON);
         populateList();
         populateGrid();
+        console.log(resultsJSON.page, resultsJSON.total_pages);
+        populateNumberRow(resultsJSON.page, resultsJSON.total_pages)
     });
 }
 
@@ -135,6 +137,51 @@ function populateGrid(){
             url:
             "/images/no-image-icon.png"
         );
+    }
+}
+
+function populateNumberRow(currentPage, lastPage) {
+    $("[id=pageNumberRow]").empty();
+
+    const delta = 1;
+    let leftEnd = currentPage - delta;
+    let rightEnd = currentPage + delta + 1;
+    let pageRange = [];
+    let formattedPageRange = [];
+    let temp;
+
+    for (let i=1;i<=lastPage;i++){
+        if (i == 1 || i == lastPage || i >= leftEnd && i < rightEnd) {
+            pageRange.push(i);
+        }
+    }
+    console.log(pageRange);
+
+    for (let i of pageRange) {
+        if (temp) {
+            if (i - temp === 2) {
+                formattedPageRange.push(temp + 1);
+            } else if (i - temp !== 1) {
+                formattedPageRange.push('...');
+            }
+        }
+        formattedPageRange.push(i);
+        temp = i;
+    }
+    console.log(formattedPageRange);
+
+    for(let i of formattedPageRange){
+        if (i == currentPage) {
+            $("[id=pageNumberRow]").append(
+                `<p class="pageNumber activePage" onclick="search(${i})">${
+                    i
+                }</p>`
+            );
+        } else {
+            $("[id=pageNumberRow]").append(
+                `<p class="pageNumber" onclick="search(${i})">${i}</p>`
+            );
+        }
     }
 }
 
