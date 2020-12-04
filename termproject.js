@@ -26,25 +26,25 @@ function formSearchURL(searchTerms, pageNumber) {
 
 function firstSearch(button) {
     if(button==="search"){
-        if(search(1)==-1){
+        if(search(1,SEARCH_METHOD)==-1){
             return;
         }
     }
     else if(button==="popular"){
-        search(1,true);
+        search(1,POPULAR_METHOD);
     }
     $("[id=movieList]").show();
-    $("[id=searchBtn]").attr("onclick","search(1)");
-    $("[id=popularBtn]").attr("onclick","search(1,true)");
+    $("[id=searchBtn]").attr("onclick","search(1,SEARCH_METHOD)");
+    $("[id=popularBtn]").attr("onclick","search(1,POPULAR_METHOD)");
 }
 
-function search(pageNumber,popularBtn = false) {
+function search(pageNumber,searchMethod = SEARCH_METHOD) {
     let url;
-    if (popularBtn === true){
+    if (searchMethod === POPULAR_METHOD){
         url = `https://api.themoviedb.org/3/movie/popular?api_key=29c078526c3def639d7446d64fd1bee7&language=en-US&page=${pageNumber}`;
         currentMethod = POPULAR_METHOD;
     }
-    else if (popularBtn === false){
+    else if (searchMethod === SEARCH_METHOD){
         if ($("[id=searchInput]").val()===""){
             return -1;
         }
@@ -182,11 +182,11 @@ function populateNumberRow(currentPage, lastPage) {
     for(let page of formattedPageRange){
         if (page == currentPage) {
             $("[id=pageNumberRow]").append(
-                `<p class="pageNumber activePage" onclick="search(${page},${currentMethod===SEARCH_METHOD?false:true})">${page}</p>`
+                `<p class="pageNumber activePage" onclick="search(${page},'${currentMethod}')">${page}</p>`
             );
         } else {
             $("[id=pageNumberRow]").append(
-                `<p class="pageNumber" onclick="search(${page},${currentMethod===SEARCH_METHOD?false:true})">${page}</p>`
+                `<p class="pageNumber" onclick="search(${page},'${currentMethod}')">${page}</p>`
             );
         }
     }
