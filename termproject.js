@@ -191,14 +191,54 @@ function changeLayout(layout){
     }
 }
 
-function showDetails(index){
+function showDetails(i){
     $("[id=detailsModal]").css("display","block");
+
+    const imgURL = `http://image.tmdb.org/t/p/w154${resultsJSON.results[i].poster_path}`
+    $(`[id=detailsImg]`).attr(
+        "src",
+        resultsJSON.results[i].poster_path ? 
+        imgURL:
+        "/images/no-image-icon.png"
+    );
+
+    // resultsJSON.results[i].prop ? resultsJSON.results[i].prop : ""
+
+    $(`[id=movieTitle]`).html(
+        resultsJSON.results[i].title ? resultsJSON.results[i].title : ""
+    );
+
+    $(`[id=detailsTitle]`).html(
+        resultsJSON.results[i].title ? resultsJSON.results[i].title : ""
+    );
+    $(`[id=detailsOGTitle]`).html(
+        resultsJSON.results[i].original_title ? resultsJSON.results[i].original_title : ""
+    );
+    $(`[id=detailsReleaseDate]`).html(
+        resultsJSON.results[i].release_date ? resultsJSON.results[i].release_date : ""
+    );
+    $(`[id=detailsRating]`).html(
+        resultsJSON.results[i].vote_average ? resultsJSON.results[i].vote_average : ""
+    );
+    $(`[id=detailsNumRatings]`).html(
+        resultsJSON.results[i].vote_count ? resultsJSON.results[i].vote_count : ""
+    );
+    $(`[id=detailsPop]`).html(
+        resultsJSON.results[i].popularity ? resultsJSON.results[i].popularity : ""
+    );
+    $(`[id=detailsOverview]`).html(
+        resultsJSON.results[i].overview ? resultsJSON.results[i].overview : ""
+    );
+    $(`[id=detailsCast]`).html(
+        resultsJSON.results[i].prop ? resultsJSON.results[i].prop : ""
+    );
+    
 }
 
 //hide the detailed view
 function closeDetails(){
     document.getElementById("detailsModal").style.display = "none";
-    $("[id=modal-details]").empty();
+    // $("[id=modal-details]").empty();
 }
 
 $("[id=movieList]").hide();

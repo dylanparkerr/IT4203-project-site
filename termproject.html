@@ -70,10 +70,10 @@
                     </div>
                 </div>
 
-                <div id="navBar">
+                <div class="numRow" id="navBar">
                     <div id="pageNumberRow">
-                        <!-- <p class="pageNumber" onclick="search(page#)">1</p> 
-                        or <p class="pageNumber" onclick="search(page#, true)">1</p>
+                        <!-- <p class="pageNumber" onclick="search(page#, SEARCH_METHOD)">1</p> 
+                        or <p class="pageNumber" onclick="search(page#, POPULAR_METHOD)">1</p>
                         if the current search method is the popular button-->
                     </div>
                 </div>
@@ -117,6 +117,52 @@
                       <span class="close" onclick="closeDetails()">&times;</span>
                         <div id="modal-details">
                             <!-- Img title and table get populated here -->
+                            <div id="detailsLeftWrap">
+                                <img id="detailsImg" src="#" alt="">
+                                <h1 id="movieTitle" class="movieTitle"></h1>
+                            </div>
+                            <table id="detailsMovieTable">
+                                <tr>
+                                    <td>Title</td>
+                                    <td id="detailsTitle"></td>
+                                </tr>
+                                <tr>
+                                    <td>Original Title</td>
+                                    <td id="detailsOGTitle"></td>
+                                </tr>
+                                <tr>
+                                    <td>Release Date</td>
+                                    <td id="detailsReleaseDate"></td>
+                                </tr>
+                                <tr>
+                                    <td>Average Rating</td>
+                                    <td id="detailsRating"></td>
+                                </tr>
+                                <tr>
+                                    <td>Number of Ratings</td>
+                                    <td id="detailsNumRatings"></td>
+                                </tr>
+                                <tr>
+                                    <td>Popularity Score</td>
+                                    <td id="detailsPop"></td>
+                                </tr>
+                                <tr>
+                                    <td>Cast</td>
+                                    <td id="detailsCast" ></td>
+                                </tr>
+                                <div id="detailsOverviewWrap">
+                                <tr>
+                                    <td>Overview</td>
+                                    <td id="detailsOverview"></td>
+                                </tr>
+                                </div>
+                                <tr>
+                                    <td id="detailsSpacer">aaaaaaaaaaaaaaaa</td>
+                                    <td></td>
+                                </tr>
+                                
+                            </table>
+                            <div style="clear: both;"></div>
                         </div>
                     </div>
                 </div>
