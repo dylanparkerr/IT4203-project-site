@@ -64,6 +64,7 @@ function firstSearch(button) {
     $("[id=movieList]").show();
     $("[id=searchBtn]").attr("onclick","search(1,SEARCH_METHOD)");
     $("[id=popularBtn]").attr("onclick","search(1,POPULAR_METHOD)");
+    $("[id=layoutBar]").show();
 }
 
 function populateList() {
@@ -94,7 +95,6 @@ function populateList() {
     $(`[id=res${resultsJSON.results.length - 1}]`).css("border-radius", "0px 0px 10px 10px");
 }
 
-// populate the grid view for search results
 function populateGrid(){
     $("[id=movieGrid]").empty();
 
@@ -241,7 +241,8 @@ function showDetails(i){
 //hide the detailed view
 function closeDetails(){
     document.getElementById("detailsModal").style.display = "none";
-    // $("[id=modal-details]").empty();
+    $(`[id=creditsTable]`).empty();
+    $(`[id=review-details]`).empty();
 }
 
 function populateCredits(id){
@@ -282,7 +283,6 @@ function populatePersonDetails(id){
         $(`[id=personBio]`).html(
             personJSON.biography ? personJSON.biography : ""
         );
-        
     });
 }
 
@@ -294,6 +294,13 @@ function populateReviews(id){
     }).then(function (response) {
         console.log(reviewsJSON);
         $(`[id=reviewsLink]`).html(`Reviews (${reviewsJSON.results.length})`);
+
+        for(let i=0;i<reviewsJSON.results.length;i++){
+            $(`[id=review-details]`).append(`<div class="review" id="review${i}"></div>`);
+            $(`[id=review${i}]`).append(`<h3>Author: ${reviewsJSON.results[i].author}</h3>`);
+            $(`[id=review${i}]`).append(`<p >Rating: ${reviewsJSON.results[i].author_details.rating}</p>`);
+            $(`[id=review${i}]`).append(`<p>Review: ${reviewsJSON.results[i].content}</p>`);
+        }
     });
 }
 
@@ -320,3 +327,4 @@ function backtoDetails(){
 
 $("[id=movieList]").hide();
 $("[id=movieGrid]").hide();
+$("[id=layoutBar]").hide();
