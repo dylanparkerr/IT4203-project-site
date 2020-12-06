@@ -252,11 +252,41 @@ function populateCredits(id){
     }).then(function (response) {
         console.log(creditsJSON);
         $(`[id=castLink]`).html(`Cast (${creditsJSON.cast.length})`);
+        for(let i=0;i<creditsJSON.cast.length;i++){
+            $(`[id=creditsTable]`).append(`<tr><td onclick="populatePersonDetails(${creditsJSON.cast[i].id})">${creditsJSON.cast[i].name}</td></tr>`)
+        }
+        populatePersonDetails(creditsJSON.cast[0].id)
+    });
+}
+
+function populatePersonDetails(id){
+    let url = `https://api.themoviedb.org/3/person/${id}?api_key=29c078526c3def639d7446d64fd1bee7&language=en-US`
+    let personJSON;
+    $.get(url, function (data) {
+       personJSON = data;
+    }).then(function (response) {
+        console.log(personJSON);
+        $(`[id=personName]`).html(personJSON.name);
+        $(`[id=personBirthday]`).html(
+            personJSON.birthday ? personJSON.birthday : ""
+        );
+        $(`[id=personPlaceOfBirth]`).html(
+            personJSON.place_of_birth ? personJSON.place_of_birth : ""
+        );
+        $(`[id=personDeathDate]`).html(
+            personJSON.deathday ? personJSON.deathday : ""
+        );
+        $(`[id=personPop]`).html(
+            personJSON.popularity ? personJSON.popularity : ""
+        );
+        $(`[id=personBio]`).html(
+            personJSON.biography ? personJSON.biography : ""
+        );
+        
     });
 }
 
 function populateReviews(id){
-    console.log("populate reviews");
     let url = `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=29c078526c3def639d7446d64fd1bee7&language=en-US`
     let reviewsJSON;
     $.get(url, function (data) {
