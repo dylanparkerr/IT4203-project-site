@@ -1,6 +1,7 @@
 let resultsJSON;
 const SEARCH_METHOD = "search";
 const POPULAR_METHOD = "popular"
+//define discover
 const LIST_LAYOUT = "list";
 const GRID_LAYOUT = "grid";
 let currentMethod = SEARCH_METHOD;
@@ -38,8 +39,7 @@ function search(pageNumber,searchMethod = SEARCH_METHOD) {
         url = formSearchURL(searchTerms,pageNumber);
         currentMethod = SEARCH_METHOD;
     }
-    console.log(url);
-    console.log(currentMethod);
+    // else if discover
 
     $.get(url, function (data) {
         resultsJSON = data;
@@ -61,9 +61,11 @@ function firstSearch(button) {
     else if(button==="popular"){
         search(1,POPULAR_METHOD);
     }
+    //else if discover
     $("[id=movieList]").show();
     $("[id=searchBtn]").attr("onclick","search(1,SEARCH_METHOD)");
     $("[id=popularBtn]").attr("onclick","search(1,POPULAR_METHOD)");
+    //redefine onclick for discover
     $("[id=layoutBar]").show();
 }
 
@@ -238,7 +240,6 @@ function showDetails(i){
     populateReviews(resultsJSON.results[i].id);
 }
 
-//hide the detailed view
 function closeDetails(){
     document.getElementById("detailsModal").style.display = "none";
     $(`[id=creditsTable]`).empty();
