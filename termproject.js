@@ -295,11 +295,23 @@ function populateReviews(id){
         console.log(reviewsJSON);
         $(`[id=reviewsLink]`).html(`Reviews (${reviewsJSON.results.length})`);
 
+        if(reviewsJSON.results.length===0){
+            $(`[id=review-details]`).append(`<h1 style="text-align:center;">No reviews available</h1>`);
+        }else{
+            $(`[id=review-details]`).append(`<h1>Reviews</h1>`);
+        }
+
         for(let i=0;i<reviewsJSON.results.length;i++){
             $(`[id=review-details]`).append(`<div class="review" id="review${i}"></div>`);
-            $(`[id=review${i}]`).append(`<h3>Author: ${reviewsJSON.results[i].author}</h3>`);
-            $(`[id=review${i}]`).append(`<p >Rating: ${reviewsJSON.results[i].author_details.rating}</p>`);
-            $(`[id=review${i}]`).append(`<p>Review: ${reviewsJSON.results[i].content}</p>`);
+            $(`[id=review${i}]`).append(`<h3>Author: ${
+                reviewsJSON.results[i].author ? reviewsJSON.results[i].author :""
+            }</h3>`);
+            $(`[id=review${i}]`).append(`<p >Rating: ${
+                reviewsJSON.results[i].author_details.rating ? reviewsJSON.results[i].author_details.rating : ""
+            }</p>`);
+            $(`[id=review${i}]`).append(`<p>Review: ${
+                reviewsJSON.results[i].content ? reviewsJSON.results[i].content : ""
+            }</p>`);
         }
     });
 }
