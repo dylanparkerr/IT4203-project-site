@@ -193,6 +193,10 @@ function changeLayout(layout){
 
 function showDetails(i){
     $("[id=detailsModal]").css("display","block");
+    $(`[id=movie-details]`).show();
+    $(`[id=credit-details]`).hide();
+    $(`[id=review-details]`).hide();
+    $(`[id=detailsBack]`).hide();
 
     const imgURL = `http://image.tmdb.org/t/p/w154${resultsJSON.results[i].poster_path}`
     $(`[id=detailsImg]`).attr(
@@ -229,16 +233,59 @@ function showDetails(i){
     $(`[id=detailsOverview]`).html(
         resultsJSON.results[i].overview ? resultsJSON.results[i].overview : ""
     );
-    $(`[id=detailsCast]`).html(
-        resultsJSON.results[i].prop ? resultsJSON.results[i].prop : ""
-    );
     
+    populateCredits(resultsJSON.results[i].id);
+    populateReviews(resultsJSON.results[i].id);
 }
 
 //hide the detailed view
 function closeDetails(){
     document.getElementById("detailsModal").style.display = "none";
     // $("[id=modal-details]").empty();
+}
+
+function populateCredits(id){
+    let url = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=29c078526c3def639d7446d64fd1bee7&language=en-US`
+    let creditsJSON;
+    $.get(url, function (data) {
+       creditsJSON = data;
+    }).then(function (response) {
+        console.log(creditsJSON);
+        $(`[id=castLink]`).html(`Cast (${creditsJSON.cast.length})`);
+    });
+}
+
+function populateReviews(id){
+    console.log("populate reviews");
+    let url = `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=29c078526c3def639d7446d64fd1bee7&language=en-US`
+    let reviewsJSON;
+    $.get(url, function (data) {
+       reviewsJSON = data;
+    }).then(function (response) {
+        console.log(reviewsJSON);
+        $(`[id=reviewsLink]`).html(`Reviews (${reviewsJSON.results.length})`);
+    });
+}
+
+function showCredits(){
+    $(`[id=movie-details]`).hide();
+    $(`[id=credit-details]`).show();
+    $(`[id=review-details]`).hide();
+    $(`[id=detailsBack]`).show();
+}
+
+function showReviews(){
+    $(`[id=movie-details]`).hide();
+    $(`[id=credit-details]`).hide();
+    $(`[id=review-details]`).show();
+    $(`[id=detailsBack]`).show();
+}
+
+function backtoDetails(){
+    $(`[id=movie-details]`).show();
+    $(`[id=credit-details]`).hide();
+    $(`[id=review-details]`).hide();
+    $(`[id=detailsBack]`).hide();
 }
 
 $("[id=movieList]").hide();

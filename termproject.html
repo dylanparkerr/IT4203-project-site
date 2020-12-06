@@ -115,54 +115,60 @@
                 <div id="detailsModal" class="modal">
                     <div class="modal-content" id="movie-content">
                       <span class="close" onclick="closeDetails()">&times;</span>
+                      <span id="detailsBack" onclick="backtoDetails()">&lt;</span>
                         <div id="modal-details">
-                            <!-- Img title and table get populated here -->
-                            <div id="detailsLeftWrap">
-                                <img id="detailsImg" src="#" alt="">
-                                <h1 id="movieTitle" class="movieTitle"></h1>
-                            </div>
-                            <table id="detailsMovieTable">
-                                <tr>
-                                    <td>Title</td>
-                                    <td id="detailsTitle"></td>
-                                </tr>
-                                <tr>
-                                    <td>Original Title</td>
-                                    <td id="detailsOGTitle"></td>
-                                </tr>
-                                <tr>
-                                    <td>Release Date</td>
-                                    <td id="detailsReleaseDate"></td>
-                                </tr>
-                                <tr>
-                                    <td>Average Rating</td>
-                                    <td id="detailsRating"></td>
-                                </tr>
-                                <tr>
-                                    <td>Number of Ratings</td>
-                                    <td id="detailsNumRatings"></td>
-                                </tr>
-                                <tr>
-                                    <td>Popularity Score</td>
-                                    <td id="detailsPop"></td>
-                                </tr>
-                                <tr>
-                                    <td>Cast</td>
-                                    <td id="detailsCast" ></td>
-                                </tr>
-                                <div id="detailsOverviewWrap">
-                                <tr>
-                                    <td>Overview</td>
-                                    <td id="detailsOverview"></td>
-                                </tr>
+                            <div id="movie-details">
+                                <div id="detailsLeftWrap">
+                                    <img id="detailsImg" src="#" alt="">
+                                    <h1 id="movieTitle" class="movieTitle"></h1>
+                                    <h2 id="castLink" style="float:left;" onclick="showCredits()">Cast</h2>
+                                    <h2 id="reviewsLink" style="float:right;" onclick="showReviews()">Reviews</h2>
                                 </div>
-                                <tr>
-                                    <td id="detailsSpacer">aaaaaaaaaaaaaaaa</td>
-                                    <td></td>
-                                </tr>
-                                
-                            </table>
-                            <div style="clear: both;"></div>
+                                <table id="detailsMovieTable">
+                                    <tr>
+                                        <td>Title</td>
+                                        <td id="detailsTitle"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Original Title</td>
+                                        <td id="detailsOGTitle"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Release Date</td>
+                                        <td id="detailsReleaseDate"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Average Rating</td>
+                                        <td id="detailsRating"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Number of Ratings</td>
+                                        <td id="detailsNumRatings" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Popularity Score</td>
+                                        <td id="detailsPop"></td>
+                                    </tr>
+                                    <div id="detailsOverviewWrap">
+                                    <tr>
+                                        <td>Overview</td>
+                                        <td id="detailsOverview"></td>
+                                    </tr>
+                                    </div>
+                                    <tr>
+                                        <td id="detailsSpacer">aaaaaaaaaaaaaaaa</td>
+                                        <td></td>
+                                    </tr>
+                                    
+                                </table>
+                                <div style="clear: both;"></div>
+                            </div>
+                            <div id="credit-details">
+                                <h1>credits</h1>
+                            </div>
+                            <div id="review-details">
+                                <h1>reviews</h1>
+                            </div>
                         </div>
                     </div>
                 </div>

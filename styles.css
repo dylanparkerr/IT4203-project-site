@@ -711,6 +711,7 @@ tr:nth-child(even) {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 30px;
     font-weight: 400;
+    margin-bottom: 50px;
     overflow: hidden;
 }
 
@@ -734,4 +735,27 @@ tr:nth-child(even) {
     font-size: 20px;
     font-weight: 400;
     padding: 5px;
+}
+
+#detailsBack {
+    color: #aaa;
+    float: left;
+    font-size: 28px;
+    font-weight: bold;
+}
+#detailsBack:hover,
+#detailsBack:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#modal-details h2 {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    font-style: italic;
+}
+#modal-details h2:hover {
+    text-decoration: underline;
 }
