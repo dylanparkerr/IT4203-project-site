@@ -38,9 +38,7 @@
                 <br>
                 <br>
                 <p class="section-details">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Illum repellendus, eos explicabo fugiat consequatur quos
-                    porro quas in molestias beatae.
+                    This term project is the culmination of concepts I have learned and implemented over this past semester in IT 4203 Advanced Web Development. This page uses The Movie Database API to let a user search for movies. Users can search for movies using search terms, discover movies by genre and sort the results, or see the list of the most popular movies that is updated daily. The results are displayed in multiple views and a user can pull details of a movie by clicking on any result. Additionally, the details modal has cast and review information if the user clicks those links.
                 </p>
 
                 <div id="search">
@@ -54,15 +52,12 @@
                             type="search"
                             placeholder="Ex: Inception"
                         />
-                        <button id="searchBtn" onclick="firstSearch('search')">
-                            Search
-                        </button>
+                        <button id="searchBtn" onclick="firstSearch('search')">Search</button>
 
                         <br>
                         <p id="or">Or</p>
                         
                         <div class="discoverWrap">
-                            <!-- discover -->
                             <label for="genres">Genre: </label>
                             <select name="genres" id="genreList">
                                 <option value="28">Action</option>
@@ -100,16 +95,15 @@
                                 <option value="desc">&darr;</option>
                             </select>
 
-                            <button id="discoverBtn" onclick="firstSearch('discover')">
-                                Discover
-                            </button>
+                            <button id="discoverBtn" onclick="firstSearch('discover')">Discover</button>
                         </div>
 
-
                     </div>
+
                     <button id="popularBtn" onclick="firstSearch('popular')">
                         See What's Popular
                     </button>
+
                     <div class="floatclear"></div>
                 </div>
 
@@ -131,7 +125,7 @@
                 <div id="searchResult">
                     <div id="movieList">
                         <!-- this gets populated by results that look like this, where '#' is the index of the loop -->
-                        <!-- <div class="movieBookRes" id="res#" onclick="showDetails(#)">
+                        <!-- <div class="movieRes" id="res#" onclick="showDetails(#)">
                             <p></p>
                         </div> -->
                     </div>
@@ -213,6 +207,7 @@
                                 </table>
                                 <div style="clear: both;"></div>
                             </div>
+                            
                             <div id="credit-details">
                                 <h1 style="float:left;">Cast</h1>
                                 <h1 style="float:left; margin-left: 36%;">Details</h1>

@@ -1,13 +1,17 @@
+//global JSON storage
 let resultsJSON;
+//magic strings for search methods
 const SEARCH_METHOD = "search";
 const POPULAR_METHOD = "popular"
-//define discover
 const DISCOVER_METHOD = "discover";
-
-const LIST_LAYOUT = "list";
-const GRID_LAYOUT = "grid";
+//global tracking of current search method
 let currentMethod = SEARCH_METHOD;
 
+//magic strings for layour views
+const LIST_LAYOUT = "list";
+const GRID_LAYOUT = "grid";
+
+//forms url with search terms 
 function formSearchURL(searchTerms, pageNumber) {
     const URL_FRONT = "https://api.themoviedb.org/3/search/movie?api_key=29c078526c3def639d7446d64fd1bee7&query=";
     let queryTerms = "";
@@ -23,9 +27,9 @@ function formSearchURL(searchTerms, pageNumber) {
     }
 
     return `${URL_FRONT}${queryTerms}${URL_PAGE}${pageNumber}${URL_END}`;
-
 }
 
+//forms url based on user input from drop down selects
 function formDiscoverURL(pageNumber){
     const URL_FRONT = "https://api.themoviedb.org/3/discover/movie?api_key=29c078526c3def639d7446d64fd1bee7&language=en-US&sort_by="
     const sort = $("#sortList option:selected").val();
@@ -37,8 +41,11 @@ function formDiscoverURL(pageNumber){
     return `${URL_FRONT}${sort}.${direction}${URL_MIDDLE}${pageNumber}${URL_GENRE}${genre}`;
 }
 
+//fetches JSON object from TMDb api
 function search(pageNumber,searchMethod = SEARCH_METHOD) {
     let url;
+    
+    //form API url based on the search method
     if (searchMethod === POPULAR_METHOD){
         url = `https://api.themoviedb.org/3/movie/popular?api_key=29c078526c3def639d7446d64fd1bee7&language=en-US&page=${pageNumber}`;
         currentMethod = POPULAR_METHOD;
@@ -51,55 +58,55 @@ function search(pageNumber,searchMethod = SEARCH_METHOD) {
         url = formSearchURL(searchTerms,pageNumber);
         currentMethod = SEARCH_METHOD;
     }
-    // else if discover
     else if(searchMethod === DISCOVER_METHOD){
         url = formDiscoverURL(pageNumber);
         currentMethod = DISCOVER_METHOD;
     }
 
-
-
+    //retrieve the movie results
     $.get(url, function (data) {
         resultsJSON = data;
     }).then(function (response) {
-        //hide details so searching after looking at bookshelf removes old details
-        console.log(resultsJSON);
+        //populate views with results and pagination view
         populateList();
         populateGrid();
         populateNumberRow(resultsJSON.page, resultsJSON.total_pages)
+        // console.log(resultsJSON);
     });
 }
 
+// first search after loading the page is necessary because some things are initially hidden
 function firstSearch(button) {
     if(button==="search"){
-        if(search(1,SEARCH_METHOD)==-1){
+        //this will run the call, and return -1 if no search terms are provided
+        //resulting in no action
+        if(search(1,SEARCH_METHOD)===-1){
             return;
         }
     }
     else if(button==="popular"){
         search(1,POPULAR_METHOD);
     }
-    //else if discover
     else if(button==="discover"){
         search(1,DISCOVER_METHOD);
     }
 
+    //initiall view is the list view, redifine button click functions
     $("[id=movieList]").show();
     $("[id=searchBtn]").attr("onclick","search(1,SEARCH_METHOD)");
     $("[id=popularBtn]").attr("onclick","search(1,POPULAR_METHOD)");
-    //redefine onclick for discover
     $("[id=discoverBtn]").attr("onclick","search(1,DISCOVER_METHOD)");
-
-
     $("[id=layoutBar]").show();
 }
 
+//populates the list view with movie results
 function populateList() {
-
+    //empty any previous results before loading new ones
     $("[id=movieList]").empty();
 
+    //can only happen from search term, results in no diplay
     if(resultsJSON.results.length === 0){
-        //todo
+        return;
     }
 
     //create and populate list
@@ -122,7 +129,9 @@ function populateList() {
     $(`[id=res${resultsJSON.results.length - 1}]`).css("border-radius", "0px 0px 10px 10px");
 }
 
+//populates grid view with results
 function populateGrid(){
+    //empty any previous results before loading new ones
     $("[id=movieGrid]").empty();
 
     const itemsPerRow =3;
@@ -161,7 +170,9 @@ function populateGrid(){
     }
 }
 
+//dynamically change the page numbers shown based on what page the user is looking at.
 function populateNumberRow(currentPage, lastPage) {
+    //empty previous pages numbers before loading new ones
     $("[id=pageNumberRow]").empty();
 
     const delta = 2;
@@ -171,12 +182,14 @@ function populateNumberRow(currentPage, lastPage) {
     let formattedPageRange = [];
     let temp;
 
+    //add the page numbers
     for (let i=1;i<=lastPage;i++){
         if (i == 1 || i == lastPage || i >= leftEnd && i < rightEnd) {
             pageRange.push(i);
         }
     }
 
+    //add ellipses where necessary
     for (let i of pageRange) {
         if (temp) {
             if (i - temp === 2) {
@@ -189,6 +202,7 @@ function populateNumberRow(currentPage, lastPage) {
         temp = i;
     }
 
+    //format active page and format search functions
     for(let page of formattedPageRange){
         if (page == currentPage) {
             $("[id=pageNumberRow]").append(
@@ -202,6 +216,7 @@ function populateNumberRow(currentPage, lastPage) {
     }
 }
 
+//changes between result layout views
 function changeLayout(layout){
     if(layout===LIST_LAYOUT){
         currentLayout = LIST_LAYOUT;
@@ -218,6 +233,7 @@ function changeLayout(layout){
     }
 }
 
+//creates popup details modal window
 function showDetails(i){
     $("[id=detailsModal]").css("display","block");
     $(`[id=movie-details]`).show();
@@ -232,8 +248,6 @@ function showDetails(i){
         imgURL:
         "/images/no-image-icon.png"
     );
-
-    // resultsJSON.results[i].prop ? resultsJSON.results[i].prop : ""
 
     $(`[id=movieTitle]`).html(
         resultsJSON.results[i].title ? resultsJSON.results[i].title : ""
@@ -261,38 +275,45 @@ function showDetails(i){
         resultsJSON.results[i].overview ? resultsJSON.results[i].overview : ""
     );
     
+    //populate the hidden cast and reviews divs for the modal based on the movie selected
     populateCredits(resultsJSON.results[i].id);
     populateReviews(resultsJSON.results[i].id);
 }
 
+//closes modal window
 function closeDetails(){
     document.getElementById("detailsModal").style.display = "none";
     $(`[id=creditsTable]`).empty();
     $(`[id=review-details]`).empty();
 }
 
+//populates modal table with list of cast members for a given movie
 function populateCredits(id){
-    let url = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=29c078526c3def639d7446d64fd1bee7&language=en-US`
+    let url = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=29c078526c3def639d7446d64fd1bee7&language=en-US`;
     let creditsJSON;
+
     $.get(url, function (data) {
        creditsJSON = data;
     }).then(function (response) {
-        console.log(creditsJSON);
+        // console.log(creditsJSON);
         $(`[id=castLink]`).html(`Cast (${creditsJSON.cast.length})`);
         for(let i=0;i<creditsJSON.cast.length;i++){
             $(`[id=creditsTable]`).append(`<tr><td onclick="populatePersonDetails(${creditsJSON.cast[i].id})">${creditsJSON.cast[i].name}</td></tr>`)
         }
+        //initially populate the details area with the first cast members info
         populatePersonDetails(creditsJSON.cast[0].id)
     });
 }
 
+//populates modal table with cast memeber details when a user clicks on a cast memeber
 function populatePersonDetails(id){
     let url = `https://api.themoviedb.org/3/person/${id}?api_key=29c078526c3def639d7446d64fd1bee7&language=en-US`
     let personJSON;
+
     $.get(url, function (data) {
        personJSON = data;
     }).then(function (response) {
-        console.log(personJSON);
+        // console.log(personJSON);
         $(`[id=personName]`).html(personJSON.name);
         $(`[id=personBirthday]`).html(
             personJSON.birthday ? personJSON.birthday : ""
@@ -312,13 +333,15 @@ function populatePersonDetails(id){
     });
 }
 
+//populates the reviews modal screen based on the movie the user has selected
 function populateReviews(id){
     let url = `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=29c078526c3def639d7446d64fd1bee7&language=en-US`
     let reviewsJSON;
+
     $.get(url, function (data) {
        reviewsJSON = data;
     }).then(function (response) {
-        console.log(reviewsJSON);
+        // console.log(reviewsJSON);
         $(`[id=reviewsLink]`).html(`Reviews (${reviewsJSON.results.length})`);
 
         if(reviewsJSON.results.length===0){
@@ -342,6 +365,7 @@ function populateReviews(id){
     });
 }
 
+//shows the cast list and details on the modal screen
 function showCredits(){
     $(`[id=movie-details]`).hide();
     $(`[id=credit-details]`).show();
@@ -349,6 +373,7 @@ function showCredits(){
     $(`[id=detailsBack]`).show();
 }
 
+//shows the reviews for a given movie on the modal screen
 function showReviews(){
     $(`[id=movie-details]`).hide();
     $(`[id=credit-details]`).hide();
@@ -356,6 +381,7 @@ function showReviews(){
     $(`[id=detailsBack]`).show();
 }
 
+//allows the user to return to the movie details screen from the cast or reviews screen
 function backtoDetails(){
     $(`[id=movie-details]`).show();
     $(`[id=credit-details]`).hide();
@@ -363,12 +389,7 @@ function backtoDetails(){
     $(`[id=detailsBack]`).hide();
 }
 
-$.get("https://api.themoviedb.org/3/genre/movie/list?api_key=29c078526c3def639d7446d64fd1bee7&language=en-US", function (data) {
-    configJSON = data;
-}).then(function (response) {
-    console.log(configJSON);
-});
-
+//initially hide some page elements
 $("[id=movieList]").hide();
 $("[id=movieGrid]").hide();
 $("[id=layoutBar]").hide();
