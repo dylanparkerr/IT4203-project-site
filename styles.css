@@ -834,3 +834,53 @@ tr:nth-child(even) {
     border-radius: 10px;
     margin-bottom: 20px;
 }
+
+#discoverBtn {
+    float: right;
+    background-color: #231f20;
+    color: white;
+    width: 15%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+    margin-left: auto;
+}
+#discoverBtn:hover {
+    background-color: #4e4e4e;
+}
+#discoverBtn:active {
+    background-color: #ffc629;
+}
+
+#or {
+    margin-left: 47%;
+    margin-top: 40px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+label {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    margin-left: 3%;
+}
+
+select {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    border: none;
+    border-radius: 10px;
+    width: 18%;
+    margin-left: 1%;
+}
+
+.discoverWrap {
+    display: flex;
+    align-items: center;
+}
+
+.layoutBar {
+    margin-top: 275px !important;
+}
