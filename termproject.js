@@ -338,6 +338,12 @@ function backtoDetails(){
     $(`[id=detailsBack]`).hide();
 }
 
+$.get("https://api.themoviedb.org/3/genre/movie/list?api_key=29c078526c3def639d7446d64fd1bee7&language=en-US", function (data) {
+    configJSON = data;
+}).then(function (response) {
+    console.log(configJSON);
+});
+
 $("[id=movieList]").hide();
 $("[id=movieGrid]").hide();
 $("[id=layoutBar]").hide();

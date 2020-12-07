@@ -48,6 +48,7 @@
                         <h2>Search The Movie DB</h2>
                     </div>
                     <div id="search-body">
+                        
                         <input
                             id="searchInput"
                             type="search"
@@ -56,6 +57,55 @@
                         <button id="searchBtn" onclick="firstSearch('search')">
                             Search
                         </button>
+
+                        <br>
+                        <p id="or">Or</p>
+                        
+                        <div class="discoverWrap">
+                            <!-- discover -->
+                            <label for="genres">Genre: </label>
+                            <select name="genres" id="genreList">
+                                <option value="action">Action</option>
+                                <option value="adventure">Adventure</option>
+                                <option value="animation">Animation</option>
+                                <option value="comedy">Comedy</option>
+                                <option value="crime">Crime</option>
+                                <option value="documentary">Documentary</option>
+                                <option value="drama">Drama</option>
+                                <option value="family">Family</option>
+                                <option value="fantasy">Fantasy</option>
+                                <option value="history">History</option>
+                                <option value="horror">Horror</option>
+                                <option value="music">Music</option>
+                                <option value="mystery">Mystery</option>
+                                <option value="romance">Romance</option>
+                                <option value="scienceFiction">Science Fiction</option>
+                                <option value="tvMovie">TV Movie</option>
+                                <option value="thriller">Thriller</option>
+                                <option value="war">War</option>
+                                <option value="western">Western</option>
+                            </select>
+
+                            <label for="sort">Sort by: </label>
+                            <select name="sort" id="sortList">
+                                <option value="popularity">Popularity</option>
+                                <option value="releaseDate">Release Date</option>
+                                <option value="revenue">Revenue</option>
+                                <option value="voteAverage">Vote Average</option>
+                                <option value="voteCount">Vote Count</option>
+                            </select>
+
+                            <select name="direction" id="sortDirection">
+                                <option value="ascending">&uarr;</option>
+                                <option value="descending">&darr;</option>
+                            </select>
+
+                            <button id="discoverBtn" onclick="firstSearch('search')">
+                                Discover
+                            </button>
+                        </div>
+
+
                     </div>
                     <button id="popularBtn" onclick="firstSearch('popular')">
                         See What's Popular
@@ -63,7 +113,7 @@
                     <div class="floatclear"></div>
                 </div>
 
-                <div id="layoutBar">
+                <div id="layoutBar" class="layoutBar">
                     <div id="layoutRow">
                         <p class="layoutOption activeLayout" id="listOption" onclick="changeLayout(LIST_LAYOUT)">List</p>
                         <p class="layoutOption" id="gridOption" onclick="changeLayout(GRID_LAYOUT)">Grid</p>
