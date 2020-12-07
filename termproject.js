@@ -2,6 +2,8 @@ let resultsJSON;
 const SEARCH_METHOD = "search";
 const POPULAR_METHOD = "popular"
 //define discover
+const DISCOVER_METHOD = "discover";
+
 const LIST_LAYOUT = "list";
 const GRID_LAYOUT = "grid";
 let currentMethod = SEARCH_METHOD;
@@ -20,9 +22,19 @@ function formSearchURL(searchTerms, pageNumber) {
         }
     }
 
-    let url =`${URL_FRONT}${queryTerms}${URL_PAGE}${pageNumber}${URL_END}`;
+    return `${URL_FRONT}${queryTerms}${URL_PAGE}${pageNumber}${URL_END}`;
 
-    return url;
+}
+
+function formDiscoverURL(pageNumber){
+    const URL_FRONT = "https://api.themoviedb.org/3/discover/movie?api_key=29c078526c3def639d7446d64fd1bee7&language=en-US&sort_by="
+    const sort = $("#sortList option:selected").val();
+    const direction = $("#sortDirection option:selected").val();
+    const URL_MIDDLE = "&include_adult=false&page=";
+    const URL_GENRE = "&with_genres=";
+    const genre = $("#genreList option:selected").val();
+
+    return `${URL_FRONT}${sort}.${direction}${URL_MIDDLE}${pageNumber}${URL_GENRE}${genre}`;
 }
 
 function search(pageNumber,searchMethod = SEARCH_METHOD) {
@@ -40,6 +52,12 @@ function search(pageNumber,searchMethod = SEARCH_METHOD) {
         currentMethod = SEARCH_METHOD;
     }
     // else if discover
+    else if(searchMethod === DISCOVER_METHOD){
+        url = formDiscoverURL(pageNumber);
+        currentMethod = DISCOVER_METHOD;
+    }
+
+
 
     $.get(url, function (data) {
         resultsJSON = data;
@@ -62,10 +80,17 @@ function firstSearch(button) {
         search(1,POPULAR_METHOD);
     }
     //else if discover
+    else if(button==="discover"){
+        search(1,DISCOVER_METHOD);
+    }
+
     $("[id=movieList]").show();
     $("[id=searchBtn]").attr("onclick","search(1,SEARCH_METHOD)");
     $("[id=popularBtn]").attr("onclick","search(1,POPULAR_METHOD)");
     //redefine onclick for discover
+    $("[id=discoverBtn]").attr("onclick","search(1,DISCOVER_METHOD)");
+
+
     $("[id=layoutBar]").show();
 }
 
